@@ -1,6 +1,5 @@
 package com.example.burjoholic7
 
-import android.R.attr.value
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.burjoholic7.api.ApiService
-import com.example.burjoholic7.api.LoginRequest
-import com.example.burjoholic7.api.LoginResponse
+import com.example.burjoholic7.api.Login.LoginResponse
 import com.example.burjoholic7.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
