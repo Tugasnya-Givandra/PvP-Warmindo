@@ -1,21 +1,21 @@
 package com.example.burjoholic7
 
+import android.R.attr.value
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.example.burjoholic7.databinding.ActivityMainBinding
-import android.view.View
 import android.content.Intent
-import android.widget.Button
-import android.widget.ImageButton
+import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.burjoholic7.api.ApiService
 import com.example.burjoholic7.api.LoginRequest
 import com.example.burjoholic7.api.LoginResponse
+import com.example.burjoholic7.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     // simpan username dan password sebagai request body untuk request api login
                     val retrofit = Retrofit.Builder()
-                        .baseUrl("https://burjo.zzidzz.me/api/login")
+                        .baseUrl("https://burjo.zzidzz.me/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
 
@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     // Make the API call for login
                     apiService.login(loginRequestBody).enqueue(object : Callback<LoginResponse> {
                         override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+
                             if (response.isSuccessful) {
                                 val receivedToken = response.body()?.token
 
@@ -72,6 +73,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                                 binding.errorView.text = sharedPreferences.getString("token", "No token")
 
                                 // Token stored, proceed to next steps
+                                this@MainActivity.startActivity(Intent(this@MainActivity, TransactionActivity::class.java))
+
                             } else {
                                 // Handle unsuccessful login response
                                 binding.errorView.text = response.errorBody()?.string()

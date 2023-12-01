@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="text_h1" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="text_h2" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="text_common" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">12dp</item>
+    </style>
+
+
+</resources>
