@@ -1,7 +1,7 @@
 package com.example.burjoholic7.api
 
 import com.example.burjoholic7.api.Login.LoginResponse
-import com.example.burjoholic7.api.Transaksi.TransaksiResponse
+import com.example.burjoholic7.api.Transaksi.Transaksi
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -18,6 +18,7 @@ interface ApiService {
         ): Call<LoginResponse>
 
     // GET transaksi list
-    @GET("transaksi")
-    fun getTransaksiList(): Call<List<TransaksiResponse>>
+    @GET("transaksi/list")
+    fun getTransaksiList(): Call<ArrayList<Transaksi>>
 }
+

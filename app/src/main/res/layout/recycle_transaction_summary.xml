@@ -8,7 +8,7 @@
     app:cardCornerRadius="10dp"
     android:layout_marginHorizontal="20dp"
     android:layout_marginVertical="10dp"
-
+    android:id="@+id/root"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,8 +16,7 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/idtransaksi"
+        <TextView android:id="@+id/idTransaksi"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,22 +30,21 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="WT1202311270001" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <LinearLayout android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="fill_horizontal"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/idtransaksi"
+            app:layout_constraintTop_toBottomOf="@+id/idTransaksi"
             tools:layout_editor_absoluteX="16dp">
 
-            <TextView
+            <TextView android:id="@+id/labelBanyakPesanan"
                 style="@style/text_common"
 
                 tools:text="Banyak pesanan" />
 
-            <TextView
+            <TextView android:id="@+id/valBanyakPesanan"
                 style="@style/text_common"
                 android:textAlignment="textEnd"
 
@@ -63,12 +61,12 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             tools:layout_editor_absoluteX="16dp">
 
-            <TextView
+            <TextView android:id="@+id/labelMeja"
                 style="@style/text_common"
 
                 tools:text="Meja" />
 
-            <TextView
+            <TextView android:id="@+id/valMeja"
                 style="@style/text_common"
                 android:textAlignment="textEnd"
 
@@ -85,12 +83,12 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
             tools:layout_editor_absoluteX="16dp">
 
-            <TextView
+            <TextView android:id="@+id/labelLamaMenunggu"
                 style="@style/text_common"
 
                 tools:text="Lama menunggu" />
 
-            <TextView
+            <TextView android:id="@+id/valLamaMenunggu"
                 style="@style/text_common"
                 android:textAlignment="textEnd"
 
@@ -106,12 +104,12 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
             tools:layout_editor_absoluteX="16dp">
 
-            <TextView
+            <TextView android:id="@+id/labelStatus"
                 style="@style/text_common"
 
                 tools:text="Status" />
 
-            <TextView
+            <TextView android:id="@+id/valStatus"
                 style="@style/text_common"
                 android:textAlignment="textEnd"
 

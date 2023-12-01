@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.burjoholic7.api.ApiService
+import com.example.burjoholic7.api.Client
 import com.example.burjoholic7.api.Login.LoginResponse
 import com.example.burjoholic7.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -46,18 +47,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 } else {
                     // simpan username dan password sebagai request body untuk request api login
-                    val retrofit = Retrofit.Builder()
-                        .baseUrl("https://burjo.zzidzz.me/api/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build()
-
-                    val apiService = retrofit.create(ApiService::class.java)
-
-
-                    // Log.wtf("WTF!", loginRequestBody.toString())
 
                     // Make the API call for login
-                    apiService.login(inputUsername, inputPassword).enqueue(object : Callback<LoginResponse> {
+                    Client.apiService.login(inputUsername, inputPassword).enqueue(object : Callback<LoginResponse> {
                         override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                             Log.wtf("WTF", response.isSuccessful.toString())
                             Log.wtf("WTF", inputUsername)
@@ -65,13 +57,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                             if (response.isSuccessful) {
                                 val receivedToken = response.body()?.token
 
+                                Client.rebuild_client(receivedToken ?: "No token")
                                 // Store the received token in SharedPreferences
-                                val sharedPreferences = applicationContext.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                                val editor = sharedPreferences.edit()
-                                editor.putString("token", receivedToken)
-                                editor.apply()
-
-                                Log.wtf("WTF", sharedPreferences.getString("token", "No token"))
+//                                val sharedPreferences = applicationContext.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+//                                val editor = sharedPreferences.edit()
+//                                editor.putString("token", receivedToken)
+//                                editor.apply()
+//
+//                                Log.wtf("WTF", sharedPreferences.getString("token", "No token"))
 
                                 // Token stored, redirect -> TransactionActivity (it is actually home)
                                 this@MainActivity.startActivity(Intent(this@MainActivity, TransactionActivity::class.java))
