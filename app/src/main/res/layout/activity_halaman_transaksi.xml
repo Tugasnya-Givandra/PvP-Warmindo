@@ -100,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/profile_icon"/>
+                    android:src="@drawable/ic_profile"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:textAlignment="center"

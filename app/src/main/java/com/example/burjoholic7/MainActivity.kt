@@ -4,6 +4,7 @@ import android.R.attr.value
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.burjoholic7.api.ApiService
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        getSupportActionBar()?.hide();
         setContentView(R.layout.activity_main)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,9 +32,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(view)
 
         // onclick listener
-
         binding.btnLogin.setOnClickListener(this)
-
     }
 
     override fun onClick(v: View?) {
@@ -55,13 +55,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                     val apiService = retrofit.create(ApiService::class.java)
 
-                    // Create a login request body
-                    val loginRequestBody = LoginRequest(inputUsername, inputPassword)
+
+                    // Log.wtf("WTF!", loginRequestBody.toString())
 
                     // Make the API call for login
-                    apiService.login(loginRequestBody).enqueue(object : Callback<LoginResponse> {
+                    apiService.login(inputUsername, inputPassword).enqueue(object : Callback<LoginResponse> {
                         override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-
+                            Log.wtf("WTF", response.isSuccessful.toString())
+                            Log.wtf("WTF", inputUsername)
+                            Log.wtf("WTF", inputPassword)
                             if (response.isSuccessful) {
                                 val receivedToken = response.body()?.token
 
@@ -70,25 +72,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                                 val editor = sharedPreferences.edit()
                                 editor.putString("token", receivedToken)
                                 editor.apply()
-                                binding.errorView.text = sharedPreferences.getString("token", "No token")
 
-                                // Token stored, proceed to next steps
+                                Log.wtf("WTF", sharedPreferences.getString("token", "No token"))
+
+                                // Token stored, redirect -> TransactionActivity (it is actually home)
                                 this@MainActivity.startActivity(Intent(this@MainActivity, TransactionActivity::class.java))
-
                             } else {
                                 // Handle unsuccessful login response
-                                binding.errorView.text = response.errorBody()?.string()
+                                val errorText = response.errorBody()?.string()
+//                                Log.wtf("WTF", errorText)
+                                binding.errorView.text = errorText
                             }
                         }
 
                         override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                             // Handle failure to make the API call, write to errorView
                             binding.errorView.text = t.message
+                            Log.wtf("WTF!",  t.message)
                         }
                     })
-
-
-
                 }
             }
         }

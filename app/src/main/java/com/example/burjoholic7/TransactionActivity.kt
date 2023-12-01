@@ -19,7 +19,7 @@ class TransactionActivity : AppCompatActivity() {
         binding = ActivityTransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(findViewById(R.id.my_toolbar))
+//        setSupportActionBar(findViewById(R.id.app_toolbar))
 
         val navView: BottomNavigationView = binding.navView
 
@@ -28,7 +28,7 @@ class TransactionActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_transactions, R.id.navigation_histories
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

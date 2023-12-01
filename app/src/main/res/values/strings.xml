@@ -96,4 +96,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_transactions">Transactions</string>
+    <string name="title_histories">Histories</string>
+
 </resources>

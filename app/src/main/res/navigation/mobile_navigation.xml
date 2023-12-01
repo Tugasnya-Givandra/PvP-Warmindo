@@ -12,14 +12,15 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.burjoholic7.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_transactions"
+        android:name="com.example.burjoholic7.ui.transactions.TransactionsFragment"
+        android:label="@string/title_transactions"
+        tools:layout="@layout/fragment_transactions" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.burjoholic7.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_histories"
+        android:name="com.example.burjoholic7.ui.histories.HistoriesFragment"
+        android:label="@string/title_histories"
+        tools:layout="@layout/fragment_histories" />
+
 </navigation>
