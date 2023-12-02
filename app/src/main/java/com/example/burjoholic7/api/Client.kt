@@ -1,5 +1,6 @@
 package com.example.burjoholic7.api
 
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -11,11 +12,13 @@ public class Client {
 
         var apiService: ApiService = rebuild_client("No Token")
         fun rebuild_client (token: String): ApiService {
-            var client = OkHttpClient.Builder()
+            Log.wtf("WTF", token)
+            val client = OkHttpClient.Builder()
                 .addInterceptor(ServiceInterceptor(token))
                 .build()
 
             apiService = Retrofit.Builder()
+                    .client(client)
                     .baseUrl("https://burjo.zzidzz.me/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
@@ -27,13 +30,13 @@ public class Client {
 
     class ServiceInterceptor(token: String?) : Interceptor {
         var token = token
-        override fun intercept(chain: Interceptor.Chain): Response {
-            var request = chain.request()
-                .newBuilder()
-                .addHeader("Authorization", "Bearer " + token)
-                .build();
-
-            return chain.proceed(request)
+        override fun intercept(chain: Interceptor.Chain): Response  = chain.run {
+            proceed(
+                request()
+                    .newBuilder()
+                    .addHeader("Authorization", "Bearer " + token)
+                    .build()
+            )
         }
 
     }

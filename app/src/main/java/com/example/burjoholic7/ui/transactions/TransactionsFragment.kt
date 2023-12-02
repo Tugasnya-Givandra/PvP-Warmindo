@@ -1,20 +1,18 @@
 package com.example.burjoholic7.ui.transactions
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
-import com.example.burjoholic7.TransactionActivity
 import com.example.burjoholic7.api.Client
-import com.example.burjoholic7.api.Login.LoginResponse
 import com.example.burjoholic7.api.Transaksi.Transaksi
+import com.example.burjoholic7.api.Transaksi.TransaksiResponse
 import com.example.burjoholic7.databinding.FragmentTransactionsBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,7 +29,6 @@ class TransactionsFragment : Fragment() {
 
     // ui stuff
     private lateinit var rvTransactions: RecyclerView
-    private var listTransactions = ArrayList<Transaksi>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,25 +43,26 @@ class TransactionsFragment : Fragment() {
             "asd", "asd", "A1", "ASD", "", "asd", "")
 
 
-        Client.apiService.getTransaksiList().enqueue(object : Callback<ArrayList<Transaksi>> {
-            override fun onResponse(call: Call<ArrayList<Transaksi>>, response: Response<ArrayList<Transaksi>>) {
+        Log.wtf("WTF", "Requesting data")
+        Client.apiService.getTransaksiList().enqueue(object : Callback<TransaksiResponse> {
+            override fun onResponse(call: Call<TransaksiResponse>, response: Response<TransaksiResponse>) {
                 Log.wtf("WTF", response.isSuccessful.toString())
                 if (response.isSuccessful) {
                     rvTransactions = root.findViewById(R.id.rvTransactions)
                     rvTransactions.setHasFixedSize(true)
                     rvTransactions.layoutManager = LinearLayoutManager(root.context)
-                    val adapter = TransactionAdapter(response.body())
+                    Log.wtf("WTF", response.body().toString())
+                    val adapter = TransactionAdapter(this@TransactionsFragment, response.body()?.data)
                     rvTransactions.adapter = adapter
 
                 } else {
-                    // Handle unsuccessful login response
                     val errorText = response.errorBody()?.string()
                     Log.wtf("WTF", errorText)
 
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Transaksi>>, t: Throwable) {
+            override fun onFailure(call: Call<TransaksiResponse>, t: Throwable) {
                 Log.wtf("WTF!",  t.message)
             }
         })

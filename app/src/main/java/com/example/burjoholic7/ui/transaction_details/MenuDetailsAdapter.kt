@@ -1,28 +1,20 @@
-package com.example.burjoholic7.ui.transactions
+package com.example.burjoholic7.ui.transaction_details
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
 import com.example.burjoholic7.api.Transaksi.Transaksi
 
-class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : RecyclerView.Adapter<TransactionAdapter.ListViewHolder>() {
+class MenuDetailsAdapter(list: ArrayList<Transaksi>?) : RecyclerView.Adapter<MenuDetailsAdapter.ListViewHolder>() {
         private var listTransaction: ArrayList<Transaksi>?
-        private var frag: Fragment
 
         init {
             listTransaction = list
-            frag = fragment
         }
 
         //
@@ -32,30 +24,27 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
                 parent, false
             )
 
-            return ListViewHolder(frag, view)
+            return ListViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
             val transaction = listTransaction!![position]
 
-            holder.tvIdTransaksi.text      = transaction.id.toString()
+            holder.tvIdTransaksi.text   = transaction.id.toString()
             holder.tvValBanyakPesanan.text = "3"
             holder.tvValMeja.text          = transaction.kodemeja
             holder.tvValLamaMenunggu.text  = "3 Menit"
-            holder.tvValStatus.text        = transaction.status
+            holder.tvValStatus.text       = transaction.status
 
-            holder.root.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(view: View?) {
-                    Toast.makeText(
-                        holder.itemView.context,
-                        "Navigating to Transaction Details ${transaction.id.toString()}", Toast.LENGTH_SHORT
-                    ).show()
-                    holder.navController.navigate(R.id.navigation_transaction_details)
-                }
-            })
+            holder.root.setOnClickListener() {
+                Toast.makeText(
+                    holder.itemView.context,
+                    "Selected ${transaction.id.toString()}", Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
-        class ListViewHolder(fragment: Fragment, itemView: View) : RecyclerView.ViewHolder(itemView) {
+        class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             public var tvIdTransaksi:        TextView = itemView.findViewById(R.id.idTransaksi)
             public var tvValBanyakPesanan:   TextView = itemView.findViewById(R.id.valBanyakPesanan)
             public var tvValMeja:            TextView = itemView.findViewById(R.id.valMeja)
@@ -66,7 +55,6 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
             public var tvLabelLamaMenunggu:  TextView = itemView.findViewById(R.id.labelLamaMenunggu)
             public var tvLabelStatus:        TextView = itemView.findViewById(R.id.labelStatus)
             public var root:                 CardView = itemView.findViewById(R.id.root)
-            public var navController:   NavController = fragment.findNavController()
 
             init {
                 tvLabelBanyakPesanan.text = "Banyak pesanan:"
