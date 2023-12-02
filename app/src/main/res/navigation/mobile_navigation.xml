@@ -15,12 +15,22 @@
         android:id="@+id/navigation_transactions"
         android:name="com.example.burjoholic7.ui.transactions.TransactionsFragment"
         android:label="@string/title_transactions"
-        tools:layout="@layout/fragment_transactions" />
+        tools:layout="@layout/fragment_transactions" >
+        <action
+            android:id="@+id/action_navigation_transactions_to_navigation_transaction_details"
+            app:destination="@id/navigation_transaction_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_histories"
         android:name="com.example.burjoholic7.ui.histories.HistoriesFragment"
         android:label="@string/title_histories"
         tools:layout="@layout/fragment_histories" />
+
+    <fragment
+        android:id="@+id/navigation_transaction_details"
+        android:name="com.example.burjoholic7.ui.transaction_details.TransactionsDetailsFragment"
+        android:label="Transaction Details"
+        tools:layout="@layout/fragment_transaction_details" />
 
 </navigation>

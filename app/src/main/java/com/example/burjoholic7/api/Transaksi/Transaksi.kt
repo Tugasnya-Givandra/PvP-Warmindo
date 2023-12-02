@@ -1,5 +1,9 @@
 package com.example.burjoholic7.api.Transaksi
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
 data class TransaksiResponse(
     val data: ArrayList<Transaksi>
 )
@@ -28,7 +32,9 @@ data class TransaksiResponse(
 //    "namapromosi": "Promosi 4",
 //    "kodepengguna": "WT2202310X01"
 //},
-data class Transaksi(
+
+//@Parcelize
+data class Transaksi (
     val id: Int,
     val idpelanggan: Int,
     val idmeja: Int,
@@ -51,4 +57,4 @@ data class Transaksi(
     val kodewarung: String,
     val namapromosi: String,
     val kodepengguna: String
-)
+) //: Parcelable
