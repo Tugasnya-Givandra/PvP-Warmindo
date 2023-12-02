@@ -23,7 +23,6 @@ class MenuDetailsAdapter(list: ArrayList<Transaksi>?) : RecyclerView.Adapter<Men
                 R.layout.recycle_transaction_summary,
                 parent, false
             )
-
             return ListViewHolder(view)
         }
 
