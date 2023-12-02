@@ -1,6 +1,8 @@
 package com.example.burjoholic7.api.Transaksi
 
-//data class TransaksiResponse(val transaksi: List<Transaksi>)
+data class TransaksiResponse(
+    val data: ArrayList<Transaksi>
+)
 // Transaksi:
 //{
 //    "id": 4,

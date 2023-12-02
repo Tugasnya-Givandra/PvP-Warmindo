@@ -15,6 +15,7 @@ import com.example.burjoholic7.TransactionActivity
 import com.example.burjoholic7.api.Client
 import com.example.burjoholic7.api.Login.LoginResponse
 import com.example.burjoholic7.api.Transaksi.Transaksi
+import com.example.burjoholic7.api.Transaksi.TransaksiResponse
 import com.example.burjoholic7.databinding.FragmentTransactionsBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,14 +47,14 @@ class TransactionsFragment : Fragment() {
             "asd", "asd", "A1", "ASD", "", "asd", "")
 
 
-        Client.apiService.getTransaksiList().enqueue(object : Callback<ArrayList<Transaksi>> {
-            override fun onResponse(call: Call<ArrayList<Transaksi>>, response: Response<ArrayList<Transaksi>>) {
+        Client.apiService.getTransaksiList().enqueue(object : Callback<TransaksiResponse> {
+            override fun onResponse(call: Call<TransaksiResponse>, response: Response<TransaksiResponse>) {
                 Log.wtf("WTF", response.isSuccessful.toString())
                 if (response.isSuccessful) {
                     rvTransactions = root.findViewById(R.id.rvTransactions)
                     rvTransactions.setHasFixedSize(true)
                     rvTransactions.layoutManager = LinearLayoutManager(root.context)
-                    val adapter = TransactionAdapter(response.body())
+                    val adapter = TransactionAdapter(response.body()?.data)
                     rvTransactions.adapter = adapter
 
                 } else {
@@ -64,7 +65,7 @@ class TransactionsFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Transaksi>>, t: Throwable) {
+            override fun onFailure(call: Call<TransaksiResponse>, t: Throwable) {
                 Log.wtf("WTF!",  t.message)
             }
         })
