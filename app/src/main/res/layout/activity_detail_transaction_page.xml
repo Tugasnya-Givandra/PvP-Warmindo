@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_container"
-    tools:context=".ui.transaction_details.TransactionsDetailsFragment">
+    tools:context=".ui.transaction_details.DetailTransactionPage">
 
     <LinearLayout
         android:id="@+id/cont_judul"
@@ -19,7 +19,6 @@
             android:paddingLeft="20dp"
             android:layout_marginVertical="20dp"
             style="@style/Text.Title"
-            android:text="@string/Header_login"
             tools:ignore="MissingConstraints" />
     </LinearLayout>
     <LinearLayout
@@ -62,12 +61,12 @@
             android:gravity="fill_horizontal">
             <TextView
                 android:textAlignment="center"
-                android:id="@+id/labelDetailTgl"
+                android:id="@+id/labelDetailIdPelanggan"
                 style="@style/text_common"
-                tools:text="Tgl"/>
+                tools:text="Id Pelanggan"/>
             <TextView
                 android:textAlignment="center"
-                android:id="@+id/valDetailTgl"
+                android:id="@+id/valDetailIdPelanggan"
                 style="@style/text_common"
                 />
         </LinearLayout>
@@ -78,12 +77,44 @@
             android:gravity="fill_horizontal">
             <TextView
                 android:textAlignment="center"
-                android:id="@+id/labelDetailNamaPembeli"
+                android:id="@+id/labelDetailNamaPelanggan"
                 style="@style/text_common"
-                tools:text="Nama Pembeli"/>
+                tools:text="Nama Pelanggan"/>
             <TextView
                 android:textAlignment="center"
-                android:id="@+id/valDetailNamaPembeli"
+                android:id="@+id/valDetailNamaPelanggan"
+                style="@style/text_common"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="fill_horizontal">
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/labelDetailKodeMeja"
+                style="@style/text_common"
+                tools:text="Kode Meja"/>
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/valDetailKodeMeja"
+                style="@style/text_common"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="fill_horizontal">
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/labelDetailStatus"
+                style="@style/text_common"
+                tools:text="Status"/>
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/valDetailStatus"
                 style="@style/text_common"
                 />
         </LinearLayout>
@@ -106,15 +137,5 @@
                 />
         </LinearLayout>
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/cont_invoice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/recycle_transaction_summary"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
