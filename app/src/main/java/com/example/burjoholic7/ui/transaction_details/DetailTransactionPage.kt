@@ -3,9 +3,14 @@ package com.example.burjoholic7.ui.transaction_details
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
+import com.example.burjoholic7.api.Transaksi.Transaksi
 
 class DetailTransactionPage : AppCompatActivity() {
+    private lateinit var rv_list: RecyclerView
+    private var listMakanan = ArrayList<Transaksi>()
     companion object {
         const val KEY_ID = "key_id"
         const val KEY_KODEMEJA = "key_kodemeja"
@@ -16,6 +21,16 @@ class DetailTransactionPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_transaction_page)
+        // List Makanan
+        listMakanan.add(Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
+            1,"150.000", "Ayam Goreng", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
+            "asd", "asd", "A1", "ASD", "", "asd", "",1))
+        rv_list = findViewById(R.id.rv_list)
+        rv_list.setHasFixedSize(true)
+        rv_list.setLayoutManager(LinearLayoutManager(this))
+        val DetailMakananAdapter = DetailMakananAdapter(listMakanan)
+        rv_list.setAdapter(DetailMakananAdapter)
+
         val labelId= findViewById<TextView>(R.id.labelDetailIdTransaksi)
         val labelIdPelanggan= findViewById<TextView>(R.id.labelDetailIdPelanggan)
         val labelNamaPelanggan= findViewById<TextView>(R.id.labelDetailNamaPelanggan)
