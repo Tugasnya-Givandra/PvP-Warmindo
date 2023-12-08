@@ -19,6 +19,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.transaction_details.DetailTransactionPage"
+            android:label="@string/title_detail_transaksi"
             android:exported="true" />
         <activity
             android:name=".Detail_transaction"
