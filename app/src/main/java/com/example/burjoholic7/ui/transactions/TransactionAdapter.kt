@@ -1,19 +1,16 @@
 package com.example.burjoholic7.ui.transactions
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
 import com.example.burjoholic7.api.Transaksi.Transaksi
 import com.example.burjoholic7.ui.transaction_details.DetailTransactionPage
-import com.example.burjoholic7.ui.transaction_details.TransactionsDetailsFragment
 
 class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : RecyclerView.Adapter<TransactionAdapter.ListViewHolder>() {
         private var listTransaction: ArrayList<Transaksi>?
@@ -53,8 +50,14 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
                 detailIntent.putExtra(DetailTransactionPage.KEY_IDPELANGGAN, transaction.idpelanggan.toString())
                 detailIntent.putExtra(DetailTransactionPage.KEY_NAMAPELANGGAN, transaction.namapelanggan)
                 detailIntent.putExtra(DetailTransactionPage.KEY_TOTAL, transaction.total)
-
                 holder.itemView.context.startActivity(detailIntent)
+            }
+        }
+        fun updateStatusById(transactionId: Int?, newStatus: String) {
+            val position = listTransaction?.indexOfFirst { it.id == transactionId }
+            if (position != null && position != -1) {
+                listTransaction?.get(position)?.status = newStatus
+                notifyItemChanged(position)
             }
         }
 

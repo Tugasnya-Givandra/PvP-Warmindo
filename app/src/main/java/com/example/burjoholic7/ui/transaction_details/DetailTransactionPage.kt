@@ -1,12 +1,16 @@
 package com.example.burjoholic7.ui.transaction_details
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
 import com.example.burjoholic7.api.Transaksi.Transaksi
+import com.example.burjoholic7.ui.transactions.TransactionAdapter
+import com.example.burjoholic7.ui.transactions.TransactionsFragment
 
 class DetailTransactionPage : AppCompatActivity() {
     private lateinit var rvlist: RecyclerView
@@ -67,11 +71,38 @@ class DetailTransactionPage : AppCompatActivity() {
             Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
                 1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
                 "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
+        listMakanan.add(
+            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
+                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
+                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
+        listMakanan.add(
+            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
+                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
+                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
+        listMakanan.add(
+            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
+                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
+                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
+        listMakanan.add(
+            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
+                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
+                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
         rvlist = findViewById(R.id.rv_list)
         rvlist.setHasFixedSize(true)
         rvlist.layoutManager = LinearLayoutManager(this)
         val detailMakananAdapter = DetailMakananAdapter(listMakanan)
         rvlist.adapter = detailMakananAdapter
 
+        val buttonSubmit = findViewById<Button>(R.id.submit_pesanan)
+        buttonSubmit.setOnClickListener {
+            val transactionId = intent.getStringExtra(KEY_ID)?.toIntOrNull()
+            val newStatus = "Aktif"
+            if (transactionId != null && newStatus.isNotEmpty()) {
+                val adapter = rvlist.adapter as? TransactionAdapter
+                adapter?.updateStatusById(transactionId, newStatus)
+            }
+            val intent = Intent(this, TransactionsFragment::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -57,7 +57,6 @@ class TransactionsFragment : Fragment() {
                 } else {
                     val errorText = response.errorBody()?.string()
                     Log.wtf("WTF", errorText)
-
                 }
             }
 

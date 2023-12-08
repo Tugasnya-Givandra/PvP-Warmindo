@@ -46,7 +46,7 @@ data class Transaksi(
     val totaldiskon: String,
     val created_at: String,
     val updated_at: String,
-    val status: String,
+    var status: String,
     val namapengguna: String,
     val username_pengguna: String,
     val kodemeja: String,
