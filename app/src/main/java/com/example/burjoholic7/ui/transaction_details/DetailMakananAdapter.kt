@@ -31,25 +31,23 @@ class DetailMakananAdapter(list: ArrayList<Transaksi>?) : RecyclerView.Adapter<D
         val gambar = ContextCompat.getDrawable(holder.itemView.context, R.drawable.home)
         Glide.with(holder.itemView.context)
             .load(gambar)
-            .into(holder.Detail_gambar_makanan!!)
-        holder.Detail_nama_makanan!!.text      = transaction.namapelanggan
-        holder.Detail_harga_makanan!!.text     = transaction.total
+            .into(holder.detail_gambar_makanan!!)
+        holder.detail_nama_makanan!!.text      = transaction.namamakanan
+        holder.detail_harga_makanan!!.text     = transaction.hargamakanan.toString()
 
         holder.itemView.setOnClickListener {
-            fun onClick(view: View?) {
-                Toast.makeText(
-                    holder.itemView.context,
-                    "Wareg", Toast.LENGTH_SHORT
-                ).show()
-            }
+            Toast.makeText(
+                holder.itemView.context,
+                "Wareg", Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        public var Detail_gambar_makanan: ImageView? = null
-        public var Detail_nama_makanan: TextView = itemView.findViewById(R.id.Detail_nama_makanan)
-        public var Detail_harga_makanan: TextView = itemView.findViewById(R.id.Detail_harga_makanan)
-        public var root_detail: CardView = itemView.findViewById(R.id.root_detail)
+        public var detail_gambar_makanan: ImageView? = itemView.findViewById(R.id.Detail_gambar_makanan)
+        public var detail_nama_makanan: TextView = itemView.findViewById(R.id.Detail_nama_makanan)
+        public var detail_harga_makanan: TextView = itemView.findViewById(R.id.Detail_harga_makanan)
+        public var rootdetail: CardView = itemView.findViewById(R.id.root_detail)
 
     }
 

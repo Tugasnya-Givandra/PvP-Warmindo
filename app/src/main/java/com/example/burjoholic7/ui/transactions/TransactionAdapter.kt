@@ -1,16 +1,19 @@
 package com.example.burjoholic7.ui.transactions
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
 import com.example.burjoholic7.api.Transaksi.Transaksi
 import com.example.burjoholic7.ui.transaction_details.DetailTransactionPage
+import com.example.burjoholic7.ui.transaction_details.TransactionsDetailsFragment
 
 class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : RecyclerView.Adapter<TransactionAdapter.ListViewHolder>() {
         private var listTransaction: ArrayList<Transaksi>?
@@ -44,11 +47,12 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
                     holder.itemView.context,
                     DetailTransactionPage::class.java
                 )
-                detailIntent.putExtra(DetailTransactionPage.KEY_ID, "W1972103")
-                detailIntent.putExtra(DetailTransactionPage.KEY_KODEMEJA, "1234")
-                detailIntent.putExtra(DetailTransactionPage.KEY_STATUS, "aktif")
-                detailIntent.putExtra(DetailTransactionPage.KEY_IDPELANGGAN, "aktif")
-                detailIntent.putExtra(DetailTransactionPage.KEY_NAMAPELANGGAN, "aktif")
+                detailIntent.putExtra(DetailTransactionPage.KEY_ID, transaction.id.toString())
+                detailIntent.putExtra(DetailTransactionPage.KEY_KODEMEJA, transaction.kodemeja)
+                detailIntent.putExtra(DetailTransactionPage.KEY_STATUS, transaction.status)
+                detailIntent.putExtra(DetailTransactionPage.KEY_IDPELANGGAN, transaction.idpelanggan.toString())
+                detailIntent.putExtra(DetailTransactionPage.KEY_NAMAPELANGGAN, transaction.namapelanggan)
+                detailIntent.putExtra(DetailTransactionPage.KEY_TOTAL, transaction.total)
 
                 holder.itemView.context.startActivity(detailIntent)
             }

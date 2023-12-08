@@ -39,7 +39,7 @@ class TransactionsFragment : Fragment() {
 
         val sampleTransaction = Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
             1,"20K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-            "asd", "asd", "A1", "ASD", "", "asd", "",1)
+            "asd", "asd", "A1", "ASD", "", "asd", "","Ayam goreng",150000,1)
 
 
         Log.wtf("WTF", "Requesting data")
