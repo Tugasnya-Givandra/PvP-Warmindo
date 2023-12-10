@@ -56,7 +56,7 @@ data class Transaksi(
     val kodepengguna: String,
 
 //    gatau ini buat list makanan
-    val namamakanan: String,
-    val hargamakanan: Int,
-    val gambar: Int
+//    val namamakanan: String,
+//    val hargamakanan: Int,
+//    val gambar: Int
 ) //: Parcelable

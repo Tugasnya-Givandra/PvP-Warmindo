@@ -3,14 +3,21 @@ package com.example.burjoholic7.ui.transaction_details
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
+import com.example.burjoholic7.api.Client
 import com.example.burjoholic7.api.Transaksi.Transaksi
+import com.example.burjoholic7.api.Transaksi.TransaksiDetailResponse
+import com.example.burjoholic7.api.Transaksi.TransaksiResponse
 import com.example.burjoholic7.ui.transactions.TransactionAdapter
 import com.example.burjoholic7.ui.transactions.TransactionsFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailTransactionPage : AppCompatActivity() {
     private lateinit var rvlist: RecyclerView
@@ -42,7 +49,7 @@ class DetailTransactionPage : AppCompatActivity() {
         val tvTotal = findViewById<TextView>(R.id.valDetailSummary)
 
 
-        val id = intent.getStringExtra(KEY_ID)
+        val id = intent.getIntExtra(KEY_ID, -1)
         val kodemeja = intent.getStringExtra(KEY_KODEMEJA)
         val status = intent.getStringExtra(KEY_STATUS)
         val idpelanggan = intent.getStringExtra(KEY_IDPELANGGAN)
@@ -67,31 +74,54 @@ class DetailTransactionPage : AppCompatActivity() {
 
 
 
-        listMakanan.add(
-            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-        listMakanan.add(
-            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-        listMakanan.add(
-            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-        listMakanan.add(
-            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-        listMakanan.add(
-            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-        rvlist = findViewById(R.id.rv_list)
-        rvlist.setHasFixedSize(true)
-        rvlist.layoutManager = LinearLayoutManager(this)
-        val detailMakananAdapter = DetailMakananAdapter(listMakanan)
-        rvlist.adapter = detailMakananAdapter
+//        listMakanan.add(
+//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
+//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
+//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
+//        listMakanan.add(
+//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
+//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
+//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
+//        listMakanan.add(
+//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
+//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
+//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
+//        listMakanan.add(
+//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
+//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
+//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
+//        listMakanan.add(
+//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
+//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
+//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
+//        rvlist = findViewById(R.id.rv_list)
+//        rvlist.setHasFixedSize(true)
+//        rvlist.layoutManager = LinearLayoutManager(this)
+//        val detailMakananAdapter = DetailMakananAdapter(listMakanan)
+//        rvlist.adapter = detailMakananAdapter
+
+
+        Log.wtf("WTF", "Requesting transaction details $id")
+        Client.apiService.getTransaksiDetail(id).enqueue(object : Callback<TransaksiDetailResponse> {
+            override fun onResponse(call: Call<TransaksiDetailResponse>, response: Response<TransaksiDetailResponse>) {
+                Log.wtf("WTF", response.isSuccessful.toString())
+                if (response.isSuccessful) {
+                    rvlist = findViewById(R.id.rv_list)
+                    rvlist.setHasFixedSize(true)
+                    rvlist.layoutManager = LinearLayoutManager(this@DetailTransactionPage)
+                    val detailMakananAdapter = DetailMakananAdapter(response.body()?.detail_transaksi)
+                    rvlist.adapter = detailMakananAdapter
+
+                } else {
+                    val errorText = response.errorBody()?.string()
+                    Log.wtf("WTF", errorText)
+                }
+            }
+
+            override fun onFailure(call: Call<TransaksiDetailResponse>, t: Throwable) {
+                Log.wtf("WTF!",  t.message)
+            }
+        })
 
         val buttonSubmit = findViewById<Button>(R.id.submit_pesanan)
         buttonSubmit.setOnClickListener {

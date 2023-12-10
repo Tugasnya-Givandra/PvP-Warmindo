@@ -14,6 +14,7 @@ import com.example.burjoholic7.R
 import com.example.burjoholic7.api.Client
 import com.example.burjoholic7.api.Transaksi.Transaksi
 import com.example.burjoholic7.api.Transaksi.TransaksiResponse
+import com.example.burjoholic7.databinding.FragmentTransactionDetailsBinding
 import com.example.burjoholic7.databinding.FragmentTransactionsBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,7 +23,7 @@ import retrofit2.Response
 
 class TransactionsDetailsFragment : Fragment() {
 
-    private var _binding: FragmentTransactionsBinding? = null
+    private var _binding: FragmentTransactionDetailsBinding? = null
     private val binding get() = _binding!!
     // ui stuff
     private lateinit var rvTransactions: RecyclerView
@@ -34,7 +35,7 @@ class TransactionsDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTransactionsBinding.inflate(inflater, container, false)
+        _binding = FragmentTransactionDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
     }

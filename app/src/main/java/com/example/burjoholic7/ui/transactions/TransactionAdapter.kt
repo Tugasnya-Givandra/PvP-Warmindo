@@ -44,7 +44,7 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
                     holder.itemView.context,
                     DetailTransactionPage::class.java
                 )
-                detailIntent.putExtra(DetailTransactionPage.KEY_ID, transaction.id.toString())
+                detailIntent.putExtra(DetailTransactionPage.KEY_ID, transaction.id)
                 detailIntent.putExtra(DetailTransactionPage.KEY_KODEMEJA, transaction.kodemeja)
                 detailIntent.putExtra(DetailTransactionPage.KEY_STATUS, transaction.status)
                 detailIntent.putExtra(DetailTransactionPage.KEY_IDPELANGGAN, transaction.idpelanggan.toString())
