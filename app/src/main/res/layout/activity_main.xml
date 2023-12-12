@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@drawable/bg_resto">
-
     <LinearLayout
         android:id="@+id/form_login"
         android:layout_width="250dp"

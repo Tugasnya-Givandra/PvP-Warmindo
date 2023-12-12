@@ -5,32 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_container"
-    tools:context=".ui.transaction_details.TransactionsDetailsFragment">
+    tools:context=".ui.transaction_details.DetailTransactionPage">
 
-    <LinearLayout
-        android:id="@+id/cont_judul"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
-        <TextView
-            android:id="@+id/Judul_Detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:layout_marginVertical="20dp"
-            style="@style/Text.Title"
-            android:text="@string/Header_login"
-            tools:ignore="MissingConstraints" />
-    </LinearLayout>
     <LinearLayout
         android:id="@+id/cont_invoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="20dp"
         android:orientation="vertical"
         android:background="@drawable/border"
-        app:layout_constraintTop_toBottomOf="@+id/cont_judul"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
         <TextView
             android:id="@+id/judul_invoice"
@@ -45,14 +30,15 @@
             android:layout_marginTop="25dp"
             android:gravity="fill_horizontal">
             <TextView
-                android:textAlignment="center"
+                android:paddingLeft="25dp"
                 android:id="@+id/labelDetailIdTransaksi"
                 style="@style/text_common"
                 tools:text="Id Transaksi"/>
             <TextView
-                android:textAlignment="center"
+                android:paddingLeft="25dp"
                 android:id="@+id/valDetailIdTransaksi"
                 style="@style/text_common"
+                android:text="WT1202311270001"
                 />
         </LinearLayout>
         <LinearLayout
@@ -61,13 +47,31 @@
             android:layout_marginTop="15dp"
             android:gravity="fill_horizontal">
             <TextView
-                android:textAlignment="center"
-                android:id="@+id/labelDetailTgl"
+                android:paddingLeft="25dp"
+                android:id="@+id/labelDetailIdPelanggan"
                 style="@style/text_common"
-                tools:text="Tgl"/>
+                tools:text="Id Pelanggan"/>
             <TextView
-                android:textAlignment="center"
-                android:id="@+id/valDetailTgl"
+                android:paddingLeft="25dp"
+                android:id="@+id/valDetailIdPelanggan"
+                style="@style/text_common"
+                android:text="1723013"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="fill_horizontal">
+            <TextView
+                android:paddingLeft="25dp"
+                android:id="@+id/labelDetailNamaPelanggan"
+                style="@style/text_common"
+                tools:text="Nama Pelanggan"/>
+            <TextView
+                android:paddingLeft="25dp"
+                android:id="@+id/valDetailNamaPelanggan"
+                android:text="PAIJO"
                 style="@style/text_common"
                 />
         </LinearLayout>
@@ -77,14 +81,32 @@
             android:layout_marginTop="15dp"
             android:gravity="fill_horizontal">
             <TextView
-                android:textAlignment="center"
-                android:id="@+id/labelDetailNamaPembeli"
+                android:paddingLeft="25dp"
+                android:id="@+id/labelDetailKodeMeja"
                 style="@style/text_common"
-                tools:text="Nama Pembeli"/>
+                tools:text="Kode Meja"/>
             <TextView
-                android:textAlignment="center"
-                android:id="@+id/valDetailNamaPembeli"
+                android:paddingLeft="25dp"
+                android:id="@+id/valDetailKodeMeja"
+                android:text="12"
                 style="@style/text_common"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="fill_horizontal">
+            <TextView
+                android:paddingLeft="25dp"
+                android:id="@+id/labelDetailStatus"
+                style="@style/text_common"
+                tools:text="Status"/>
+            <TextView
+                android:paddingLeft="25dp"
+                android:id="@+id/valDetailStatus"
+                style="@style/text_common"
+                android:text="Belum Dibayar"
                 />
         </LinearLayout>
         <LinearLayout
@@ -93,28 +115,38 @@
             android:layout_marginTop="25dp"
             android:gravity="center">
             <TextView
-                android:textAlignment="viewEnd"
+                android:paddingLeft="25dp"
                 android:id="@+id/labelDetailSummary"
                 android:paddingRight="10dp"
                 style="@style/text_common"
                 tools:text="Total Transaksi"/>
             <TextView
-                android:textAlignment="textStart"
-                android:paddingLeft="10dp"
+                android:paddingLeft="25dp"
                 android:id="@+id/valDetailSummary"
+                android:text="500.000"
                 style="@style/text_common"
                 />
         </LinearLayout>
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/cont_invoice"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/submit_pesanan"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cont_invoice"
+        tools:listitem="@layout/recycle_detailmakanan" />
+
+    <Button
+        android:id="@+id/submit_pesanan"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="PESANAN SELESAI"
+        app:layout_constraintTop_toBottomOf="@id/rv_list"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/recycle_transaction_summary"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

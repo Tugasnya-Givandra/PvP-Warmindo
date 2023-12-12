@@ -12,9 +12,8 @@ import com.example.burjoholic7.R
 import com.example.burjoholic7.api.Client
 import com.example.burjoholic7.api.Transaksi.Transaksi
 import com.example.burjoholic7.api.Transaksi.TransaksiDetailResponse
-import com.example.burjoholic7.api.Transaksi.TransaksiResponse
 import com.example.burjoholic7.ui.transactions.TransactionAdapter
-import com.example.burjoholic7.ui.transactions.TransactionsFragment
+import com.example.burjoholic7.ui.transactions.TransactionAddFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -131,7 +130,7 @@ class DetailTransactionPage : AppCompatActivity() {
                 val adapter = rvlist.adapter as? TransactionAdapter
                 adapter?.updateStatusById(transactionId, newStatus)
             }
-            val intent = Intent(this, TransactionsFragment::class.java)
+            val intent = Intent(this, TransactionAddFragment::class.java)
             startActivity(intent)
         }
     }

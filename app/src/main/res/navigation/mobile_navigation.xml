@@ -12,13 +12,31 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/navigation_transaction_add"
+        android:name="com.example.burjoholic7.ui.transactions.TransactionAddFragment"
+        android:label="Add New Transaction"
+        tools:layout="@layout/fragment_transaction_add" />
+
+    <fragment
         android:id="@+id/navigation_transactions"
         android:name="com.example.burjoholic7.ui.transactions.TransactionsFragment"
         android:label="@string/title_transactions"
         tools:layout="@layout/fragment_transactions" >
         <action
             android:id="@+id/action_navigation_transactions_to_navigation_transaction_details"
-            app:destination="@id/navigation_transaction_details" />
+            app:destination="@id/navigation_transaction_details"
+            app:popUpTo="@id/navigation_transactions"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+        <action
+            android:id="@+id/action_navigation_transactions_to_navigation_transaction_add"
+            app:destination="@id/navigation_transaction_add"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/navigation_transactions"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -31,6 +49,11 @@
         android:id="@+id/navigation_transaction_details"
         android:name="com.example.burjoholic7.ui.transaction_details.TransactionsDetailsFragment"
         android:label="Transaction Details"
-        tools:layout="@layout/fragment_transaction_details" />
+        tools:layout="@layout/fragment_transaction_details" >
+        <action
+            android:id="@+id/action_navigation_transaction_details_pop_including_mobile_navigation"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>
