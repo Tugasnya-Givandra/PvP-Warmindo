@@ -27,7 +27,7 @@ class TransactionsDetailsFragment : Fragment() {
     private val binding get() = _binding!!
     // ui stuff
     private lateinit var rvTransactions: RecyclerView
-    private var listTransactions = ArrayList<Transaksi>()
+    private var listTransactions = ArrayList<Map<String, Any>>()
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(

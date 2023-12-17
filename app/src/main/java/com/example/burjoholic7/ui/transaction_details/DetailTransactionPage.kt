@@ -72,34 +72,6 @@ class DetailTransactionPage : AppCompatActivity() {
         tvTotal.text = String.format("%s", total)
 
 
-
-//        listMakanan.add(
-//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-//        listMakanan.add(
-//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-//        listMakanan.add(
-//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-//        listMakanan.add(
-//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-//        listMakanan.add(
-//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-//        rvlist = findViewById(R.id.rv_list)
-//        rvlist.setHasFixedSize(true)
-//        rvlist.layoutManager = LinearLayoutManager(this)
-//        val detailMakananAdapter = DetailMakananAdapter(listMakanan)
-//        rvlist.adapter = detailMakananAdapter
-
-
         Log.wtf("WTF", "Requesting transaction details $id")
         Client.apiService.getTransaksiDetail(id).enqueue(object : Callback<TransaksiDetailResponse> {
             override fun onResponse(call: Call<TransaksiDetailResponse>, response: Response<TransaksiDetailResponse>) {

@@ -56,7 +56,6 @@ class TransactionsFragment : Fragment() {
                     val adapter = TransactionAdapter(this@TransactionsFragment, response.body()?.data)
                     binding.rvTransactions.adapter = adapter
 //                    rvTransactions.adapter = adapter
-
                 } else {
                     val errorText = response.errorBody()?.string()
                     Log.wtf("WTF", errorText)

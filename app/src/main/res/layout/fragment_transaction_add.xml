@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/fragment_container"
-            tools:context=".ui.transaction_details.TransactionsDetailsFragment">
+            tools:context=".ui.transaction_add.TransactionAddFragment">
 
             <LinearLayout android:id="@+id/cont_judul"
                 android:layout_width="match_parent"
@@ -44,11 +44,31 @@
                         android:text="+ Tambah Menu"
                         app:layout_constraintVertical_bias="1.0" />
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/label_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total : "
+                        android:textSize="20dp"
+                        />
+                    <TextView
+                        android:id="@+id/value_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:text="100.000"
+                        android:textSize="20dp"
+                        />
+                </LinearLayout>
 
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_list"
+                android:id="@+id/rvListMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -56,7 +76,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cont_judul"
-                tools:listitem="@layout/recycle_detailmakanan" />
+                tools:listitem="@layout/activity_list_menu" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>
