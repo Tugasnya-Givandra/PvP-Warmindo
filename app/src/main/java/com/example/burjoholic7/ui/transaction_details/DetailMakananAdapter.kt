@@ -48,9 +48,9 @@ class DetailMakananAdapter(list: ArrayList<Map<String, Any>>?) : RecyclerView.Ad
                 .load(transactionDetails["gambar"])
                 .into(holder.detail_gambar_makanan!!)
 
-            var amount_string = if (transactionDetails["jumlah"] == 1) "${transactionDetails["jumlah"]}x " else ""
-            holder.detail_nama_makanan!!.text      = "${amount_string}${transactionDetails["namamenu"]}"
-            holder.detail_harga_makanan!!.text     = transactionDetails["subtotal"].toString()
+            val amount_string = if (transactionDetails["jumlah"] == 1) "${transactionDetails["jumlah"]}x " else ""
+            holder.detail_nama_makanan.text      = "${amount_string}${transactionDetails["namamenu"]}"
+            holder.detail_harga_makanan.text     = transactionDetails["subtotal"].toString()
 
             holder.itemView.setOnClickListener {
                 Toast.makeText(

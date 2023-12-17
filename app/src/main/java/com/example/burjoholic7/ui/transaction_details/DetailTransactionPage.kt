@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
+import com.example.burjoholic7.api.BasicResponse
 import com.example.burjoholic7.api.Client
 import com.example.burjoholic7.api.Transaksi.Transaksi
 import com.example.burjoholic7.api.Transaksi.TransaksiDetailResponse
-import com.example.burjoholic7.ui.transactions.TransactionAdapter
 import com.example.burjoholic7.ui.transactions.TransactionAddFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,16 +48,6 @@ class DetailTransactionPage : AppCompatActivity() {
         val tvNamaPelanggan = findViewById<TextView>(R.id.valDetailNamaPelanggan)
         val tvTotal = findViewById<TextView>(R.id.valDetailSummary)
 
-
-        val id = intent.getIntExtra(KEY_ID, -1)
-        val kodemeja = intent.getStringExtra(KEY_KODEMEJA)
-        val status = intent.getStringExtra(KEY_STATUS)
-        val idpelanggan = intent.getStringExtra(KEY_IDPELANGGAN)
-        val namapelanggan = intent.getStringExtra(KEY_NAMAPELANGGAN)
-        val total = intent.getStringExtra(KEY_TOTAL)
-
-
-
         labelId.text = String.format("Id")
         labelKodeMeja.text = String.format("Kode Meja")
         labelStatus.text = String.format("Status")
@@ -64,40 +55,8 @@ class DetailTransactionPage : AppCompatActivity() {
         labelNamaPelanggan.text = String.format("Nama Pelanggan")
         labelTotal.text = String.format("Total Transaksi")
 
-        tvId.text = String.format("%s", id)
-        tvKodeMeja.text = String.format("%s", kodemeja)
-        tvStatus.text = String.format("%s", status)
-        tvIdPelanggan.text = String.format("%s", idpelanggan)
-        tvNamaPelanggan.text = String.format("%s", namapelanggan)
-        tvTotal.text = String.format("%s", total)
+        val id = intent.getIntExtra(KEY_ID, -1)
 
-
-
-//        listMakanan.add(
-//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-//        listMakanan.add(
-//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-//        listMakanan.add(
-//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-//        listMakanan.add(
-//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-//        listMakanan.add(
-//            Transaksi(1, 1, 1,1,1,"01-10-2020", "20:23",
-//                1,"10K", "", "asd", "10%", "01-10-2020", "01-10-2020", "proses",
-//                "asd", "asd", "A1", "ASD", "", "asd", "","Ayam Goreng",150000,1))
-//        rvlist = findViewById(R.id.rv_list)
-//        rvlist.setHasFixedSize(true)
-//        rvlist.layoutManager = LinearLayoutManager(this)
-//        val detailMakananAdapter = DetailMakananAdapter(listMakanan)
-//        rvlist.adapter = detailMakananAdapter
 
 
         Log.wtf("WTF", "Requesting transaction details $id")
@@ -105,12 +64,24 @@ class DetailTransactionPage : AppCompatActivity() {
             override fun onResponse(call: Call<TransaksiDetailResponse>, response: Response<TransaksiDetailResponse>) {
                 Log.wtf("WTF", response.isSuccessful.toString())
                 if (response.isSuccessful) {
+                    val kodemeja = response.body()?.data?.get("kodemeja")
+                    val status = response.body()?.data?.get("status")
+                    val idpelanggan = response.body()?.data?.get("idpelanggan")
+                    val namapelanggan = response.body()?.data?.get("namapelanggan")
+                    val total = response.body()?.data?.get("total")
+
+                    tvId.text = String.format("%s", id)
+                    tvKodeMeja.text = String.format("%s", kodemeja)
+                    tvStatus.text = String.format("%s", status)
+                    tvIdPelanggan.text = String.format("%s", idpelanggan)
+                    tvNamaPelanggan.text = String.format("%s", namapelanggan)
+                    tvTotal.text = String.format("%s", total)
+
                     rvlist = findViewById(R.id.rv_list)
                     rvlist.setHasFixedSize(true)
                     rvlist.layoutManager = LinearLayoutManager(this@DetailTransactionPage)
                     val detailMakananAdapter = DetailMakananAdapter(response.body()?.detail_transaksi)
                     rvlist.adapter = detailMakananAdapter
-
                 } else {
                     val errorText = response.errorBody()?.string()
                     Log.wtf("WTF", errorText)
@@ -122,16 +93,33 @@ class DetailTransactionPage : AppCompatActivity() {
             }
         })
 
+
+
         val buttonSubmit = findViewById<Button>(R.id.submit_pesanan)
         buttonSubmit.setOnClickListener {
-            val transactionId = intent.getStringExtra(KEY_ID)?.toIntOrNull()
-            val newStatus = "Aktif"
-            if (transactionId != null && newStatus.isNotEmpty()) {
-                val adapter = rvlist.adapter as? TransactionAdapter
-                adapter?.updateStatusById(transactionId, newStatus)
-            }
-            val intent = Intent(this, TransactionAddFragment::class.java)
-            startActivity(intent)
+//            val transactionId = intent.getIntExtra(KEY_ID, 0)
+
+//            val transactionStatus = intent.getStringExtra(KEY_STATUS)
+//            val statuses = arrayOf("baru", "diproses", "disajikan", "selesai")
+//            val newStatus = statuses[statuses.indexOfFirst{it == transactionStatus} + 1]
+
+            Client.apiService.updateTransaksi(id).enqueue(object : Callback<BasicResponse> {
+                override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                    val newStatus = response.body()?.data?.get("status")
+                    Toast.makeText(this@DetailTransactionPage, "status berhasil diubah menjadi $newStatus", Toast.LENGTH_SHORT).show()
+                    finish()
+                    startActivity(getIntent());
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                    Toast.makeText(this@DetailTransactionPage, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+
+
+
+//            val intent = Intent(this, TransactionAddFragment::class.java)
+//            startActivity(intent)
         }
     }
 }

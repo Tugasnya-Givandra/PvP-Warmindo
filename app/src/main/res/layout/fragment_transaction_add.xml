@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="20dp"
+                    android:paddingHorizontal="5dp"
                     android:gravity="center_vertical">
                     <TextView
                         style="@style/Text.Header"
@@ -36,27 +37,32 @@
                         android:layout_marginVertical="20dp"
                         android:text="Menu yang dipilih" />
 
-                    <Button
-                        android:id="@+id/bt_tambah_pesanan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:text="+ Tambah Menu"
-                        app:layout_constraintVertical_bias="1.0" />
+<!--                    <Button-->
+<!--                        android:id="@+id/bt_tambah_pesanan"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0"-->
+<!--                        android:text="+ Tambah Menu"-->
+<!--                        app:layout_constraintVertical_bias="1.0" />-->
                 </LinearLayout>
 
-            </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cont_judul"
-                tools:listitem="@layout/recycle_detailmakanan" />
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tambah_menu"
+                    android:hint="Pilih menu"
+                    android:padding="12dp"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
+                    android:background="@android:drawable/editbox_background"
+                    />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>

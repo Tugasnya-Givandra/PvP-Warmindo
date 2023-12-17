@@ -58,15 +58,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                                 val receivedToken = response.body()?.token
 
                                 Client.rebuild_client(receivedToken ?: "No token")
-                                // Store the received token in SharedPreferences
-//                                val sharedPreferences = applicationContext.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-//                                val editor = sharedPreferences.edit()
-//                                editor.putString("token", receivedToken)
-//                                editor.apply()
-//
-//                                Log.wtf("WTF", sharedPreferences.getString("token", "No token"))
 
-                                // Token stored, redirect -> TransactionActivity (it is actually home)
+                                val sharedPreferences = applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putString("token", receivedToken)
+                                editor.putInt("roleid", response.body()?.idrole ?: 0 )
+
+                                editor.apply()
+
+
                                 this@MainActivity.startActivity(Intent(this@MainActivity, TransactionActivity::class.java))
                             } else {
                                 // Handle unsuccessful login response

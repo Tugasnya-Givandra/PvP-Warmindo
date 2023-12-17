@@ -24,9 +24,21 @@ interface ApiService {
     @GET("transaksi/list")
     fun getTransaksiList(): Call<TransaksiResponse>
 
+    @GET("transaksi/history")
+    fun getTransaksiHistories(): Call<TransaksiResponse>
+
     @GET("transaksi/detail/{transaction_id}")
     fun getTransaksiDetail(
         @Path(value="transaction_id") transactionId: Int,
     ) : Call<TransaksiDetailResponse>
+
+    @GET("transaksi/update-status-transaksi/{transaction_id}")
+    fun updateTransaksi(
+        @Path(value="transaction_id") transactionId: Int,
+    ): Call<BasicResponse>
+
+    @GET("menu/list")
+    fun getMenuList(): Call<BasicListResponse>
+
 }
 
