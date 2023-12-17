@@ -45,35 +45,31 @@ class ListMenuAddAdapter(fragment: Fragment, list: ArrayList<Map<String, Any>>) 
             .load(transactionDetails["gambar"])
             .into(holder.detail_gambar_makanan!!)
 
-        var amount_string = if (transactionDetails["jumlah"] == 1) "${transactionDetails["jumlah"]}x " else ""
-        holder.detail_nama_makanan!!.text      = "${amount_string}${transactionDetails["namamenu"]}"
-        holder.detail_harga_makanan!!.text     = transactionDetails["subtotal"].toString()
+        holder.detail_nama_makanan!!.text      = transactionDetails["namamenu"].toString()
+        holder.detail_harga_makanan!!.text     = transactionDetails["harga"].toString()
 
         var jumlah = 0
-        val subtotal = transactionDetails["subtotal"] as? Int ?: 0
+        val subtotal = transactionDetails["harga"] as? Int ?: 0
         val itemTotal = subtotal * jumlah
 
         holder.itemView.findViewById<Button>(R.id.tambah).setOnClickListener {
             jumlah++
-            totalSum += subtotal
+            totalSum += itemTotal
             totalSumListener?.onTotalSumCalculated(totalSum)
-            holder.itemView.findViewById<TextView>(R.id.cont_tambah).text = jumlah.toString()
         }
 
         holder.itemView.findViewById<Button>(R.id.kurang).setOnClickListener {
             jumlah--
-            totalSum -= subtotal
+            totalSum -= itemTotal
             totalSumListener?.onTotalSumCalculated(totalSum)
-            holder.itemView.findViewById<TextView>(R.id.cont_tambah).text = jumlah.toString()
         }
-        totalSum += itemTotal
         holder.itemView.setOnClickListener {
             Toast.makeText(
                 holder.itemView.context,
                 "Wareg", Toast.LENGTH_SHORT
             ).show()
         }
-        holder.jumlah.text = jumlah.toString()
+        holder.jumlah!!.text = jumlah.toString()
     }
     class ListViewHolder(fragment: Fragment, itemView: View) : RecyclerView.ViewHolder(itemView) {
         public var detail_gambar_makanan: ImageView? = itemView.findViewById(R.id.Detail_gambar_makanan)

@@ -27,7 +27,7 @@ class DetailMakananAdapter(list: ArrayList<Map<String, Any>>?) : RecyclerView.Ad
         }
 
 
-        override fun onBindViewHolder(holder: DetailMakananAdapter.ListViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
             val transactionDetails = listTransaction!![position]
             Glide.with(holder.itemView.context)
                 .load(transactionDetails["gambar"])

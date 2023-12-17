@@ -23,7 +23,8 @@ interface ApiService {
     // GET transaksi list
     @GET("transaksi/list")
     fun getTransaksiList(): Call<TransaksiResponse>
-
+    @GET("transaksi/create")
+    fun createTransaksi(): Call<TransaksiDetailResponse>
     @GET("transaksi/detail/{transaction_id}")
     fun getTransaksiDetail(
         @Path(value="transaction_id") transactionId: Int,
