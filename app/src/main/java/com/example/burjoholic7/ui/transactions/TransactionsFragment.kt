@@ -1,5 +1,6 @@
 package com.example.burjoholic7.ui.transactions
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -38,7 +39,9 @@ class TransactionsFragment : Fragment() {
         val root: View = binding.root
 
         binding.btTambahPesanan.setOnClickListener {
-            findNavController().navigate(R.id.navigation_transaction_add)
+              findNavController().navigate(R.id.navigation_transaction_add)
+//            val intent = Intent(requireContext(), tambahTransaksi::class.java)
+//            startActivity(intent)
         }
 
         Log.wtf("WTF", "Requesting data")
@@ -48,15 +51,9 @@ class TransactionsFragment : Fragment() {
                 if (response.isSuccessful) {
                     binding.rvTransactions.setHasFixedSize(true)
                     binding.rvTransactions.layoutManager = LinearLayoutManager(root.context)
-
-//                    rvTransactions = root.findViewById(R.id.rvTransactions)
-//                    rvTransactions.setHasFixedSize(true)
-//                    rvTransactions.layoutManager = LinearLayoutManager(root.context)
                     Log.wtf("WTF", response.body().toString())
                     val adapter = TransactionAdapter(this@TransactionsFragment, response.body()?.data)
                     binding.rvTransactions.adapter = adapter
-//                    rvTransactions.adapter = adapter
-
                 } else {
                     val errorText = response.errorBody()?.string()
                     Log.wtf("WTF", errorText)

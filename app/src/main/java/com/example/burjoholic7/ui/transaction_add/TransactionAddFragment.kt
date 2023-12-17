@@ -3,6 +3,7 @@ package com.example.burjoholic7.ui.transactions
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,6 +19,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
 import com.example.burjoholic7.databinding.FragmentTransactionAddBinding
 
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.burjoholic7.R
+import com.example.burjoholic7.api.Client
+import com.example.burjoholic7.api.Transaksi.TransaksiDetailResponse
+import com.example.burjoholic7.api.Transaksi.TransaksiResponse
+import com.example.burjoholic7.databinding.FragmentTransactionAddBinding
+import com.example.burjoholic7.ui.transaction_add.ListMenuAddAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TransactionAddFragment : Fragment() {
 
@@ -98,6 +112,7 @@ class TransactionAddFragment : Fragment() {
                 }
         }
     }
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -106,11 +121,25 @@ class TransactionAddFragment : Fragment() {
         _binding = FragmentTransactionAddBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-//        binding.btTambahPesanan.setOnClickListener() {
-//            findNavController()
-//        }
-
+        Log.wtf("WTF", "Requesting data")
+        Client.apiService.createTransaksi().enqueue(object : Callback<TransaksiDetailResponse> {
+            override fun onResponse(call: Call<TransaksiDetailResponse>, response: Response<TransaksiDetailResponse>) {
+                Log.wtf("WTF", response.isSuccessful.toString())
+                if (response.isSuccessful) {
+                    binding.rvListMenu.setHasFixedSize(true)
+                    binding.rvListMenu.layoutManager = LinearLayoutManager(root.context)
+                    Log.wtf("WTF", response.body().toString())
+                    val adapter = ListMenuAddAdapter(this@TransactionAddFragment, response.body()!!.detail_transaksi)
+                    binding.rvListMenu.adapter = adapter
+                } else {
+                    val errorText = response.errorBody()?.string()
+                    Log.wtf("WTFFF", errorText)
+                }
+            }
+            override fun onFailure(call: Call<TransaksiDetailResponse>, t: Throwable) {
+                Log.wtf("WTF!",  t.message)
+            }
+        })
         return root
     }
 

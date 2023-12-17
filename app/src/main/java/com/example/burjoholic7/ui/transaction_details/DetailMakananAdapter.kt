@@ -26,24 +26,9 @@ class DetailMakananAdapter(list: ArrayList<Map<String, Any>>?) : RecyclerView.Ad
             return ListViewHolder(view)
         }
 
-//    {
-//        "id": 1,
-//        "idtransaksi": 1,
-//        "idmenu": 1,
-//        "namamenu": "Mie Dog Dog",
-//        "harga": "10000",
-//        "jumlah": "2",
-//        "subtotal": "20000",
-//        "status": "aktif",
-//        "created_at": "2023-12-08T15:56:58.000000Z",
-//        "updated_at": "2023-12-08T15:56:58.000000Z",
-//        "kategori": "Makanan",
-//        "gambar": "https://cdn.discordapp.com/attachments/1179985192346206278/1180183339014037554/photo.jpg"
-//    }
 
-        override fun onBindViewHolder(holder: DetailMakananAdapter.ListViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
             val transactionDetails = listTransaction!![position]
-            val gambar = ContextCompat.getDrawable(holder.itemView.context, R.drawable.home)
             Glide.with(holder.itemView.context)
                 .load(transactionDetails["gambar"])
                 .into(holder.detail_gambar_makanan!!)

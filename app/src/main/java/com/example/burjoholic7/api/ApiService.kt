@@ -27,6 +27,9 @@ interface ApiService {
     @GET("transaksi/history")
     fun getTransaksiHistories(): Call<TransaksiResponse>
 
+    @GET("transaksi/create")
+    fun createTransaksi(): Call<TransaksiDetailResponse>
+    
     @GET("transaksi/detail/{transaction_id}")
     fun getTransaksiDetail(
         @Path(value="transaction_id") transactionId: Int,
