@@ -2,9 +2,12 @@ package com.example.burjoholic7.api
 
 import android.R.attr.value
 import com.example.burjoholic7.api.Login.LoginResponse
+import com.example.burjoholic7.api.Transaksi.TransaksiCreateRequest
+import com.example.burjoholic7.api.Transaksi.TransaksiCreateResponse
 import com.example.burjoholic7.api.Transaksi.TransaksiDetailResponse
 import com.example.burjoholic7.api.Transaksi.TransaksiResponse
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -27,8 +30,8 @@ interface ApiService {
     @GET("transaksi/history")
     fun getTransaksiHistories(): Call<TransaksiResponse>
 
-    @GET("transaksi/create")
-    fun createTransaksi(): Call<TransaksiDetailResponse>
+    @POST("transaksi/create")
+    fun createTransaksi(@Body request: TransaksiCreateRequest): Call<TransaksiCreateResponse>
     
     @GET("transaksi/detail/{transaction_id}")
     fun getTransaksiDetail(

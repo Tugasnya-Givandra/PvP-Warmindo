@@ -13,16 +13,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.burjoholic7.R
-import com.example.burjoholic7.api.Transaksi.Transaksi
 
 
-class ListMenuAddAdapter(fragment: Fragment, list: ArrayList<Map<String, Any>>) : RecyclerView.Adapter<ListMenuAddAdapter.ListViewHolder>() {
-    private var listTransaction: ArrayList<Map<String, Any>>
+class ListMenuAddAdapter(fragment: Fragment, list: ArrayList<MutableMap<String, Any>>) : RecyclerView.Adapter<ListMenuAddAdapter.ListViewHolder>() {
+    public var listMenu: ArrayList<MutableMap<String, Any>>
     private var totalSum: Int = 0
     private var frag: Fragment
     private var totalSumListener: TotalSumListener? = null
     init {
-        listTransaction = list
+        listMenu = list
         frag = fragment
     }
     interface TotalSumListener {
@@ -38,48 +37,56 @@ class ListMenuAddAdapter(fragment: Fragment, list: ArrayList<Map<String, Any>>) 
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val transactionDetails = listTransaction!![position]
+        val menu = listMenu!![position]
 
         val gambar = ContextCompat.getDrawable(holder.itemView.context, R.drawable.home)
         Glide.with(holder.itemView.context)
-            .load(transactionDetails["gambar"])
+            .load(menu["gambar"].toString().toInt())
             .into(holder.detail_gambar_makanan!!)
 
-        holder.detail_nama_makanan!!.text      = transactionDetails["namamenu"].toString()
-        holder.detail_harga_makanan!!.text     = transactionDetails["harga"].toString()
+        holder.detail_nama_makanan!!.text      = menu["namamenu"].toString()
+        holder.detail_harga_makanan!!.text     = menu["harga"].toString()
 
-        var jumlah = 0
-        val subtotal = transactionDetails["harga"] as? Int ?: 0
-        val itemTotal = subtotal * jumlah
 
-        holder.itemView.findViewById<Button>(R.id.tambah).setOnClickListener {
-            jumlah++
-            totalSum += itemTotal
+//        val subtotal = menu["harga"] as? Int ?: 0
+//        val itemTotal = subtotal * jumlah
+
+        holder.itemView.findViewById<Button>(R.id.plus).setOnClickListener {
+            menu["jumlah"] = menu["jumlah"].toString().toInt() + 1
+//            totalSum += itemTotal
             totalSumListener?.onTotalSumCalculated(totalSum)
         }
 
-        holder.itemView.findViewById<Button>(R.id.kurang).setOnClickListener {
-            jumlah--
-            totalSum -= itemTotal
+        holder.itemView.findViewById<Button>(R.id.minus).setOnClickListener {
+            val jumlah = menu["jumlah"].toString().toInt() - 1
+            menu["jumlah"] = jumlah
+//            totalSum -= itemTotal
+
+            if (jumlah == 0) {
+                listMenu.removeAt(position)
+                this.notifyItemRemoved(position)
+            }
+
             totalSumListener?.onTotalSumCalculated(totalSum)
         }
+
         holder.itemView.setOnClickListener {
             Toast.makeText(
                 holder.itemView.context,
                 "Wareg", Toast.LENGTH_SHORT
             ).show()
         }
-        holder.jumlah!!.text = jumlah.toString()
+//        holder.jumlah!!.text = jumlah.toString()
     }
     class ListViewHolder(fragment: Fragment, itemView: View) : RecyclerView.ViewHolder(itemView) {
-        public var detail_gambar_makanan: ImageView? = itemView.findViewById(R.id.Detail_gambar_makanan)
-        public var detail_nama_makanan: TextView = itemView.findViewById(R.id.Detail_nama_makanan)
-        public var detail_harga_makanan: TextView = itemView.findViewById(R.id.Detail_harga_makanan)
-        public var jumlah: TextView = itemView.findViewById(R.id.jumlah)
-        public var rootdetail: CardView = itemView.findViewById(R.id.root_detail)
+        var detail_gambar_makanan: ImageView? = itemView.findViewById(R.id.Detail_gambar_makanan)
+        var detail_nama_makanan: TextView = itemView.findViewById(R.id.Detail_nama_makanan)
+        var detail_harga_makanan: TextView = itemView.findViewById(R.id.Detail_harga_makanan)
+        var jumlah: TextView = itemView.findViewById(R.id.jumlah)
+        var rootdetail: CardView = itemView.findViewById(R.id.root_detail)
     }
 
     override fun getItemCount(): Int {
-        return listTransaction!!.size
+        return listMenu!!.size
     }
 }

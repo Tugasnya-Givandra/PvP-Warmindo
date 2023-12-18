@@ -7,5 +7,5 @@ data class BasicResponse (
 
 data class BasicListResponse (
     val message: String,
-    val data: Map<String, Any>,
+    val data: List<Map<String, Any>>,
 )

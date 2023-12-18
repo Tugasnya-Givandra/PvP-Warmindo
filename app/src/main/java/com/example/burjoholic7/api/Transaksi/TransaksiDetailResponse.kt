@@ -6,6 +6,8 @@ data class TransaksiDetailResponse(
     val detail_transaksi: ArrayList<Map<String, Any>>,
 ) //: Parcelable
 
+
+
 //{
 //    "data": {
 //    "id": 1,
