@@ -29,6 +29,7 @@ import com.example.burjoholic7.api.Client
 import com.example.burjoholic7.api.Transaksi.TransaksiCreateRequest
 import com.example.burjoholic7.api.Transaksi.TransaksiCreateResponse
 import com.example.burjoholic7.api.Transaksi.TransaksiDetailResponse
+import com.example.burjoholic7.ui.transaction_add.IconTextViewAdapter
 import com.example.burjoholic7.ui.transaction_add.ListMenuAddAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,14 +40,25 @@ class TransactionAddFragment : Fragment() {
     private var _binding: FragmentTransactionAddBinding? = null
     private val binding get() = _binding!!
     // ui stuff
-    private lateinit var rvTransactions: RecyclerView
-
     private val listMenuAdapter = ListMenuAddAdapter(this, ArrayList())
+
+    val arrayList = ArrayList<Any>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
+    }
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentTransactionAddBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
-        val arrayList = ArrayList<Any>()
+        binding.rvListMenu.setHasFixedSize(true)
+        binding.rvListMenu.layoutManager = LinearLayoutManager(root.context)
+        binding.rvListMenu.adapter = listMenuAdapter
 
         Client.apiService.getMenuList().enqueue(object : Callback<BasicListResponse> {
             override fun onResponse(
@@ -67,7 +79,7 @@ class TransactionAddFragment : Fragment() {
             val dialog = Dialog(binding.root.context)
 
             dialog.setContentView(R.layout.dialog_pilih_menu)
-            dialog.window?.setLayout(650, 800)
+            dialog.window?.setLayout(720, 800)
 
             // set transparent background
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -78,8 +90,8 @@ class TransactionAddFragment : Fragment() {
             val listView: ListView = dialog.findViewById(R.id.list_view)
 
             // Initialize array adapter
-            val adapter = ArrayAdapter(
-                binding.root.context,
+            val adapter = IconTextViewAdapter(
+                dialog.context,
                 com.google.android.material.R.layout.abc_activity_chooser_view_list_item,
                 arrayList
             )
@@ -108,26 +120,22 @@ class TransactionAddFragment : Fragment() {
             })
             listView.onItemClickListener =
                 OnItemClickListener { parent, view, position, id -> // when item selected from list
-                    val menu = adapter.getItem(position).toString()
+                    val menu = adapter.getItem(position) as MutableMap<String, Any>
+                    menu.put("jumlah", 1)
 
-                    listMenuAdapter.listMenu.add(mutableMapOf("namamakanan" to menu, "gambar" to "test", "jumlah" to 1))
-                    listMenuAdapter.notifyItemInserted(listMenuAdapter.listMenu.size - 1)
+
+                    listMenuAdapter.listMenu.add(menu)
+                    Log.wtf("WTF", listMenuAdapter.listMenu.toString())
+                    listMenuAdapter.notifyDataSetChanged()
+
+                    adapter.remove(menu);
                     dialog.dismiss()
                 }
         }
-    }
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentTransactionAddBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
         binding.btBuatTransaksi.setOnClickListener {
             if (listMenuAdapter.itemCount != 0) {
-                var body = TransaksiCreateRequest(
+                val body = TransaksiCreateRequest(
                     kodemeja = "A1",
                     shift = 1,
                     namapelanggan = "joni",
