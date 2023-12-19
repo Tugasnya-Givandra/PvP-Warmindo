@@ -8,17 +8,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.ListView
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -39,7 +35,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TransactionAddFragment : Fragment(){
+class TransactionAddFragment : Fragment() {
 
     private var _binding: FragmentTransactionAddBinding? = null
     private val binding get() = _binding!!
@@ -48,12 +44,9 @@ class TransactionAddFragment : Fragment(){
 
     val arrayList = ArrayList<Any>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
-
     }
-
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,18 +56,6 @@ class TransactionAddFragment : Fragment(){
         _binding = FragmentTransactionAddBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        Dropdown metode transaksi
-        val list = arrayOf("tunai","kredit","debit","qris")
-        val dropdownAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.dropdown_transaksi,
-            list
-        )
-        binding!!.metodePembayaran.setAdapter(dropdownAdapter)
-
-
-
-//        recycle view list menu
         binding.rvListMenu.setHasFixedSize(true)
         binding.rvListMenu.layoutManager = LinearLayoutManager(root.context)
         binding.rvListMenu.adapter = listMenuAdapter
@@ -154,14 +135,11 @@ class TransactionAddFragment : Fragment(){
 
         binding.btBuatTransaksi.setOnClickListener {
             if (listMenuAdapter.itemCount != 0) {
-                listMenuAdapter.listMenu.map{
-                    it["id"]?.let{ it1 -> it.put("idmenu",it1)}
-                }
                 val body = TransaksiCreateRequest(
-                    kodemeja = binding!!.inputKodemeja.text.toString(),
+                    kodemeja = "A1",
                     shift = 1,
-                    namapelanggan = binding!!.inputNamapelanggan.text.toString(),
-                    metodepembayaran = binding!!.metodePembayaran.text.toString(),
+                    namapelanggan = "joni",
+                    metodepembayaran = "QRIS",
                     detail_transaksi = listMenuAdapter.listMenu
                 )
                 Client.apiService.createTransaksi(body).enqueue(object : Callback<TransaksiCreateResponse> {
@@ -196,40 +174,10 @@ class TransactionAddFragment : Fragment(){
                 ).show()
             }
         }
+
         return root
     }
-//    private fun setupSpinner() {
-//        val metodeTransaksiSpinner = binding.metodeTransaksi
-//        val metodeTransaksiOptions = arrayOf("cash", "Kartu_Kredit", "Kartu_Debit", "qris")
-//
-//        val dropdownAdapter = ArrayAdapter(
-//            requireContext(),
-//            R.layout.dropdown_transaksi,
-//            metodeTransaksiOptions
-//        )
-//        dropdownAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//
-//        with(metodeTransaksiSpinner) {
-//            adapter = dropdownAdapter
-//            setSelection(0, false)
-//            onItemSelectedListener = this@TransactionAddFragment
-//            prompt = "Pilih Metode Transaksi"
-//            gravity = Gravity.CENTER
-//        }
-//    }
 
-//    private fun showToast(message: String) {
-//        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-//    }
-//
-//    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//        val selectedItem = parent?.getItemAtPosition(position).toString()
-//        showToast("Selected: $selectedItem")
-//    }
-//
-//    override fun onNothingSelected(parent: AdapterView<*>?) {
-//        showToast("Pilih pembayaran dulu bang")
-//    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
