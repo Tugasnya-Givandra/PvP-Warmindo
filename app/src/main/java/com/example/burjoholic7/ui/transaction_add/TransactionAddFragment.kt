@@ -135,6 +135,9 @@ class TransactionAddFragment : Fragment() {
 
         binding.btBuatTransaksi.setOnClickListener {
             if (listMenuAdapter.itemCount != 0) {
+                listMenuAdapter.listMenu.map {
+                    it["id"]?.let { it1 -> it.put("idmenu", it1) }
+                }
 
                 val body = TransaksiCreateRequest(
                     kodemeja = "A1",

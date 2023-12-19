@@ -1,4 +1,5 @@
 package com.example.burjoholic7.ui.transaction_details
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,13 +28,14 @@ class DetailMakananAdapter(list: ArrayList<Map<String, Any>>?) : RecyclerView.Ad
         }
 
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
             val transactionDetails = listTransaction!![position]
             Glide.with(holder.itemView.context)
                 .load(transactionDetails["gambar"])
                 .into(holder.detail_gambar_makanan!!)
 
-            val amount_string = if (transactionDetails["jumlah"] == 1) "${transactionDetails["jumlah"]}x " else ""
+            val amount_string = if (transactionDetails["jumlah"] != 1) "${transactionDetails["jumlah"]}x " else ""
             holder.detail_nama_makanan.text      = "${amount_string}${transactionDetails["namamenu"]}"
             holder.detail_harga_makanan.text     = transactionDetails["subtotal"].toString()
 
