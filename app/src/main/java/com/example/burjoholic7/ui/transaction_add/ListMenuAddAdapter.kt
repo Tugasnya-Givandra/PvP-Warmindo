@@ -61,8 +61,9 @@ class ListMenuAddAdapter(fragment: TransactionAddFragment, list: ArrayList<Mutab
 
             if (jumlah == 0) {
                 listMenu.removeAt(position)
+                frag.arrayList.add(menu)
             }
-            frag.arrayList.add(menu)
+
 
             this.notifyDataSetChanged()
 
