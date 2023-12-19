@@ -55,7 +55,11 @@ class TransactionAddFragment : Fragment() {
     ): View {
         _binding = FragmentTransactionAddBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
+//      method transaksi
+        var list_metodeTransaksi = arrayOf("tunai","kredit","debit","qris")
+        val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_transaksi,list_metodeTransaksi)
+        binding!!.metodePembayaran.setAdapter(arrayAdapter)
+//      list menu
         binding.rvListMenu.setHasFixedSize(true)
         binding.rvListMenu.layoutManager = LinearLayoutManager(root.context)
         binding.rvListMenu.adapter = listMenuAdapter
@@ -136,10 +140,10 @@ class TransactionAddFragment : Fragment() {
         binding.btBuatTransaksi.setOnClickListener {
             if (listMenuAdapter.itemCount != 0) {
                 val body = TransaksiCreateRequest(
-                    kodemeja = "A1",
+                    kodemeja = binding!!.inputKodemeja.text.toString(),
                     shift = 1,
-                    namapelanggan = "joni",
-                    metodepembayaran = "QRIS",
+                    namapelanggan = binding!!.inputNamapelanggan.text.toString(),
+                    metodepembayaran = binding!!.metodePembayaran.text.toString(),
                     detail_transaksi = listMenuAdapter.listMenu
                 )
                 Client.apiService.createTransaksi(body).enqueue(object : Callback<TransaksiCreateResponse> {
