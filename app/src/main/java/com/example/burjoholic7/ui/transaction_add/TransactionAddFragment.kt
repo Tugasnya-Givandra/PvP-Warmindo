@@ -23,6 +23,7 @@ import com.example.burjoholic7.R
 import com.example.burjoholic7.databinding.FragmentTransactionAddBinding
 
 import androidx.annotation.RequiresApi
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.burjoholic7.api.BasicListResponse
 import com.example.burjoholic7.api.BasicResponse
@@ -159,6 +160,7 @@ class TransactionAddFragment : Fragment() {
                                 binding.root.context,
                                 "Transaksi berhasil dibuat!", Toast.LENGTH_SHORT
                             ).show()
+                            findNavController().popBackStack()
                         } else {
                             val errorText = response.errorBody()?.string()
                             Log.wtf("WTFFF", errorText)

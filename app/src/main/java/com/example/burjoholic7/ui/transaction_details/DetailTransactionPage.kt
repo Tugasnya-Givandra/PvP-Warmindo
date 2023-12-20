@@ -57,8 +57,6 @@ class DetailTransactionPage : AppCompatActivity() {
 
         val id = intent.getIntExtra(KEY_ID, -1)
 
-
-
         Log.wtf("WTF", "Requesting transaction details $id")
         Client.apiService.getTransaksiDetail(id).enqueue(object : Callback<TransaksiDetailResponse> {
             override fun onResponse(call: Call<TransaksiDetailResponse>, response: Response<TransaksiDetailResponse>) {
