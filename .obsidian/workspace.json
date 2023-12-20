@@ -223,6 +223,7 @@
   },
   "active": "dd801f59c6abf1df",
   "lastOpenFiles": [
+    "app/src/main/java/com/example/burjoholic7/ui/transactions/TransactionAdapter.kt~",
     "app/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/dirty-output-classes.tab.values.at",
     "app/build/kotlin/compileDebugKotlin/cacheable/dirty-sources.txt",
     "app/build/tmp/kotlin-classes/debug/META-INF/app_debug.kotlin_module",
@@ -233,7 +234,6 @@
     "app/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/dirty-output-classes.tab_i",
     "app/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/dirty-output-classes.tab.keystream.len",
     "app/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/dirty-output-classes.tab_i.len",
-    "app/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/dirty-output-classes.tab",
     "Pasted image 20231221012517.png",
     "Pasted image 20231221012417.png",
     "Pasted image 20231221012254.png",

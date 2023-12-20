@@ -1,10 +1,12 @@
 package com.example.burjoholic7.ui.transactions
 
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +14,11 @@ import com.example.burjoholic7.R
 import com.example.burjoholic7.api.Transaksi.Transaksi
 import com.example.burjoholic7.ui.histories.HistoriesFragment
 import com.example.burjoholic7.ui.transaction_details.DetailTransactionPage
+import java.text.SimpleDateFormat
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Date
 
 class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : RecyclerView.Adapter<TransactionAdapter.ListViewHolder>() {
         private var listTransaction: ArrayList<Transaksi>?
@@ -32,12 +39,18 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
             return ListViewHolder(frag, view)
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
             val transaction = listTransaction!![position]
+            var time_ordered = LocalDateTime.parse("${transaction.tanggal}T${transaction.waktu}")
+            var time_rn = LocalDateTime.now()
+
+            Duration.between((time_ordered., time_rn))
+
             holder.tvValBanyakPesanan.text = "3"
             holder.tvIdTransaksi.text      = transaction.id.toString()
             holder.tvValMeja.text          = transaction.kodemeja
-            holder.tvValLamaMenunggu.text  = "3 Menit"
+            holder.tvValLamaMenunggu.text  = "${(time_rn.- time_ordered) / 1000 / 60 / 60} Menit"
             holder.tvValStatus.text        = transaction.status
 
             holder.itemView.setOnClickListener {
