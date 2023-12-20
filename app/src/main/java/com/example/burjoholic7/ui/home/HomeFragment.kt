@@ -1,5 +1,6 @@
 package com.example.burjoholic7.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,16 +23,36 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+//        val homeViewModel =
+//            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.shift1
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val shift: TextView = binding.shiftButton
+
+        val pref = root.context.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        var shift_num = pref.getInt("shift", 1)
+
+        shift.text = "SHIFT " + if (shift_num == 1) "PAGI" else "MALAM"
+
+        shift.setOnClickListener {
+            if (shift_num == 1) {
+                shift_num = 2
+            } else {
+                shift_num = 1
+            }
+
+            shift.text = "SHIFT " +  if (shift_num == 1) "PAGI" else "MALAM"
+            pref.edit().putInt("shift", shift_num).apply()
         }
+
+
+
+
+//        homeViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 

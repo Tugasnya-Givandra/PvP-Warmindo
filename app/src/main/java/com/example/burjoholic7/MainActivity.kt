@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                                 val editor = sharedPreferences.edit()
                                 editor.putString("token", receivedToken)
                                 editor.putInt("roleid", response.body()?.idrole ?: 0 )
-
+                                editor.putInt("shift", 1)
                                 editor.apply()
 
 

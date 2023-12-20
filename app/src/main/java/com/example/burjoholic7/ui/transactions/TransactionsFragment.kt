@@ -1,5 +1,6 @@
 package com.example.burjoholic7.ui.transactions
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -45,7 +46,8 @@ class TransactionsFragment : Fragment() {
         }
 
         Log.wtf("WTF", "Requesting data")
-        Client.apiService.getTransaksiList().enqueue(object : Callback<TransaksiResponse> {
+        val sharedPreferences = root.context.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        Client.apiService.getTransaksiList(sharedPreferences.getInt("shift", 1)).enqueue(object : Callback<TransaksiResponse> {
             override fun onResponse(call: Call<TransaksiResponse>, response: Response<TransaksiResponse>) {
                 Log.wtf("WTF", response.isSuccessful.toString())
                 if (response.isSuccessful) {

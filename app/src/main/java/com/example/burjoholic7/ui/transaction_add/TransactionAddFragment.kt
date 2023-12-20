@@ -1,6 +1,7 @@
 package com.example.burjoholic7.ui.transactions
 
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -139,11 +140,15 @@ class TransactionAddFragment : Fragment() {
 
         binding.btBuatTransaksi.setOnClickListener {
             if (listMenuAdapter.itemCount != 0) {
+                listMenuAdapter.listMenu.map {
+                    it["id"]?.let { it1 -> it.put("idmenu", it1) }
+                }
+                val sharedPreferences = root.context.getSharedPreferences("pref", Context.MODE_PRIVATE)
                 val body = TransaksiCreateRequest(
-                    kodemeja = binding!!.inputKodemeja.text.toString(),
-                    shift = 1,
-                    namapelanggan = binding!!.inputNamapelanggan.text.toString(),
-                    metodepembayaran = binding!!.metodePembayaran.text.toString(),
+                    kodemeja = binding.inputKodemeja.text.toString(),
+                    shift = sharedPreferences.getInt("shift", 1),
+                    namapelanggan = binding.inputNamapelanggan.text.toString(),
+                    metodepembayaran = binding.metodePembayaran.text.toString(),
                     detail_transaksi = listMenuAdapter.listMenu
                 )
                 Client.apiService.createTransaksi(body).enqueue(object : Callback<TransaksiCreateResponse> {

@@ -17,7 +17,7 @@
     android:paddingEnd="20dp"
     android:orientation="vertical">
     <Button
-        android:id="@+id/shift1"
+        android:id="@+id/shift_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SHIFT 1" />
