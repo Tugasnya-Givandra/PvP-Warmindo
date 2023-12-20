@@ -51,12 +51,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     // Make the API call for login
                     Client.apiService.login(inputUsername, inputPassword).enqueue(object : Callback<LoginResponse> {
                         override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                            Log.wtf("WTF", response.isSuccessful.toString())
-                            Log.wtf("WTF", inputUsername)
-                            Log.wtf("WTF", inputPassword)
                             if (response.isSuccessful) {
                                 val receivedToken = response.body()?.token
-
                                 Client.rebuild_client(receivedToken ?: "No token")
 
                                 val sharedPreferences = applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -66,12 +62,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                                 editor.putInt("shift", 1)
                                 editor.apply()
 
-
                                 this@MainActivity.startActivity(Intent(this@MainActivity, TransactionActivity::class.java))
+
                             } else {
                                 // Handle unsuccessful login response
                                 val errorText = response.errorBody()?.string()
-//                                Log.wtf("WTF", errorText)
                                 binding.errorView.text = errorText
                             }
                         }

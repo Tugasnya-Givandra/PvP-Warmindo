@@ -25,8 +25,6 @@ class HistoriesFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    // ui stuff
-    private lateinit var rvTransactions: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +53,7 @@ class HistoriesFragment : Fragment() {
                 Log.wtf("WTF!",  t.message)
             }
         })
+
         return root
     }
 

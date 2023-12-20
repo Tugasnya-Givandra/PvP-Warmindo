@@ -6,35 +6,165 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp"
-    android:orientation="vertical">
     <Button
         android:id="@+id/shift_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SHIFT 1" />
-    <Button
-        android:id="@+id/shift2"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SHIFT 2"/>
-    <Button
-        android:id="@+id/shift3"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SHIFT 3"/>
+        android:layout_marginTop="120dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="SHIFT PAGI"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
 
-</LinearLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView1"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintStart_toStartOf="@+id/shift_button"
+        app:layout_constraintTop_toBottomOf="@+id/shift_button">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="-1"
+                android:text="Total Penjualan"
+                android:textSize="20sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/tvPenjualan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ASD"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView2"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView1"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="-1"
+                android:text="Total Transaksi"
+                android:textSize="20sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/tvTransaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ASD"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView3"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/materialCardView4"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="-1"
+                android:textAlignment="center"
+                android:text="Masakan Terlaris"
+                android:textSize="20sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/tvTerlaris"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ASD"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView4"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/shift_button"
+        app:layout_constraintTop_toBottomOf="@+id/shift_button">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="-1"
+                android:textAlignment="center"
+                android:text="Total Masakan Dibuat"
+                android:textSize="20sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/tvMasakan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ASD"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+    <!--    <Button-->
+<!--        android:id="@+id/shift2"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="SHIFT 2"/>-->
+<!--    <Button-->
+<!--        android:id="@+id/shift3"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="SHIFT 3"/>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

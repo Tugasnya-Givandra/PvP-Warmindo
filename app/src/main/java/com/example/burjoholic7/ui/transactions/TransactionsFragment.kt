@@ -28,9 +28,6 @@ class TransactionsFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    // ui stuff
-    private lateinit var rvTransactions: RecyclerView
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,13 +38,14 @@ class TransactionsFragment : Fragment() {
 
         binding.btTambahPesanan.setOnClickListener {
               findNavController().navigate(R.id.navigation_transaction_add)
-//            val intent = Intent(requireContext(), tambahTransaksi::class.java)
-//            startActivity(intent)
         }
 
         Log.wtf("WTF", "Requesting data")
         val sharedPreferences = root.context.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        Client.apiService.getTransaksiList(sharedPreferences.getInt("shift", 1)).enqueue(object : Callback<TransaksiResponse> {
+        val shift = sharedPreferences.getInt("shift", 1)
+        binding.btShift.text = "SHIFT " + if (shift == 1) "PAGI" else "MALAM"
+
+        Client.apiService.getTransaksiList(shift).enqueue(object : Callback<TransaksiResponse> {
             override fun onResponse(call: Call<TransaksiResponse>, response: Response<TransaksiResponse>) {
                 Log.wtf("WTF", response.isSuccessful.toString())
                 if (response.isSuccessful) {

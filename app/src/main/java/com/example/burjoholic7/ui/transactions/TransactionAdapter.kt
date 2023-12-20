@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
 import com.example.burjoholic7.api.Transaksi.Transaksi
+import com.example.burjoholic7.ui.histories.HistoriesFragment
 import com.example.burjoholic7.ui.transaction_details.DetailTransactionPage
 
 class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : RecyclerView.Adapter<TransactionAdapter.ListViewHolder>() {
@@ -50,6 +51,10 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
                 detailIntent.putExtra(DetailTransactionPage.KEY_IDPELANGGAN, transaction.idpelanggan.toString())
                 detailIntent.putExtra(DetailTransactionPage.KEY_NAMAPELANGGAN, transaction.namapelanggan)
                 detailIntent.putExtra(DetailTransactionPage.KEY_TOTAL, transaction.total)
+
+                detailIntent.putExtra("hideButton", frag is HistoriesFragment)
+
+
                 holder.itemView.context.startActivity(detailIntent)
             }
         }
@@ -62,16 +67,16 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
         }
 
         class ListViewHolder(fragment: Fragment, itemView: View) : RecyclerView.ViewHolder(itemView) {
-            public var tvIdTransaksi:        TextView = itemView.findViewById(R.id.idTransaksi)
-            public var tvValBanyakPesanan:   TextView = itemView.findViewById(R.id.valBanyakPesanan)
-            public var tvValMeja:            TextView = itemView.findViewById(R.id.valMeja)
-            public var tvValLamaMenunggu:    TextView = itemView.findViewById(R.id.valLamaMenunggu)
-            public var tvValStatus:          TextView = itemView.findViewById(R.id.valStatus)
-            public var tvLabelBanyakPesanan: TextView = itemView.findViewById(R.id.labelBanyakPesanan)
-            public var tvLabelMeja:          TextView = itemView.findViewById(R.id.labelMeja)
-            public var tvLabelLamaMenunggu:  TextView = itemView.findViewById(R.id.labelLamaMenunggu)
-            public var tvLabelStatus:        TextView = itemView.findViewById(R.id.labelStatus)
-            public var root:                 CardView = itemView.findViewById(R.id.root)
+            var tvIdTransaksi:        TextView = itemView.findViewById(R.id.idTransaksi)
+            var tvValBanyakPesanan:   TextView = itemView.findViewById(R.id.valBanyakPesanan)
+            var tvValMeja:            TextView = itemView.findViewById(R.id.valMeja)
+            var tvValLamaMenunggu:    TextView = itemView.findViewById(R.id.valLamaMenunggu)
+            var tvValStatus:          TextView = itemView.findViewById(R.id.valStatus)
+            var tvLabelBanyakPesanan: TextView = itemView.findViewById(R.id.labelBanyakPesanan)
+            var tvLabelMeja:          TextView = itemView.findViewById(R.id.labelMeja)
+            var tvLabelLamaMenunggu:  TextView = itemView.findViewById(R.id.labelLamaMenunggu)
+            var tvLabelStatus:        TextView = itemView.findViewById(R.id.labelStatus)
+            var root:                 CardView = itemView.findViewById(R.id.root)
 
             init {
                 tvLabelBanyakPesanan.text = "Banyak pesanan:"

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -93,14 +94,13 @@ class DetailTransactionPage : AppCompatActivity() {
 
 
 
+
         val buttonSubmit = findViewById<Button>(R.id.submit_pesanan)
+
+        if (intent.getBooleanExtra("hideButton", true))
+            buttonSubmit.visibility = View.GONE
+
         buttonSubmit.setOnClickListener {
-//            val transactionId = intent.getIntExtra(KEY_ID, 0)
-
-//            val transactionStatus = intent.getStringExtra(KEY_STATUS)
-//            val statuses = arrayOf("baru", "diproses", "disajikan", "selesai")
-//            val newStatus = statuses[statuses.indexOfFirst{it == transactionStatus} + 1]
-
             Client.apiService.updateTransaksi(id).enqueue(object : Callback<BasicResponse> {
                 override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                     val newStatus = response.body()?.data?.get("status")
@@ -113,11 +113,6 @@ class DetailTransactionPage : AppCompatActivity() {
                     Toast.makeText(this@DetailTransactionPage, t.message, Toast.LENGTH_SHORT).show()
                 }
             })
-
-
-
-//            val intent = Intent(this, TransactionAddFragment::class.java)
-//            startActivity(intent)
         }
     }
 }

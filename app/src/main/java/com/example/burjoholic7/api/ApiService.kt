@@ -49,5 +49,10 @@ interface ApiService {
     @GET("menu/list")
     fun getMenuList(): Call<BasicListResponse>
 
+    @GET("transaksi/rekap-shift")
+    fun getRekapShift(
+        @Query("shift")shift: Int,
+    ): Call<BasicResponse>
+
 }
 

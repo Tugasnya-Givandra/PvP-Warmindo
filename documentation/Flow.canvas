@@ -1,0 +1,20 @@
+{
+	"nodes":[
+		{"id":"809a2340982babdd","type":"file","file":"documentation/Login.md","x":-237,"y":-272,"width":400,"height":832,"color":"5"},
+		{"id":"9850076c8296af2f","type":"file","file":"documentation/Home.md","x":440,"y":-272,"width":400,"height":832,"color":"2"},
+		{"id":"7f82603a392a09b0","type":"file","file":"documentation/Histories.md","x":1320,"y":480,"width":400,"height":832,"color":"2"},
+		{"id":"37f25febe613871c","type":"file","file":"documentation/List Transaksi.md","x":1320,"y":-904,"width":400,"height":832,"color":"2"},
+		{"id":"c4c5b687ee40e835","x":2240,"y":-272,"width":400,"height":832,"color":"3","type":"file","file":"documentation/Detail Transaksi.md"},
+		{"id":"af501351aef618aa","x":2240,"y":-1760,"width":400,"height":1160,"color":"3","type":"file","file":"documentation/Tambah Transaksi.md"}
+	],
+	"edges":[
+		{"id":"ed25029dd49381cb","fromNode":"809a2340982babdd","fromSide":"right","toNode":"9850076c8296af2f","toSide":"left","color":"1"},
+		{"id":"6e37973f46ec2f55","fromNode":"9850076c8296af2f","fromSide":"top","toNode":"37f25febe613871c","toSide":"left","color":"6"},
+		{"id":"0601e1910ef84f24","fromNode":"37f25febe613871c","fromSide":"bottom","toNode":"9850076c8296af2f","toSide":"right","color":"5"},
+		{"id":"480b2eaf1bb2d16d","fromNode":"9850076c8296af2f","fromSide":"right","toNode":"7f82603a392a09b0","toSide":"top","color":"6"},
+		{"id":"b8efc31ff15c3347","fromNode":"7f82603a392a09b0","fromSide":"left","toNode":"9850076c8296af2f","toSide":"bottom","color":"5"},
+		{"id":"a2b53db313ab7c22","fromNode":"37f25febe613871c","fromSide":"right","toNode":"c4c5b687ee40e835","toSide":"top","color":"3"},
+		{"id":"2930810c6c35a353","fromNode":"7f82603a392a09b0","fromSide":"right","toNode":"c4c5b687ee40e835","toSide":"bottom","color":"3"},
+		{"id":"eb3deeef9c6b646c","fromNode":"37f25febe613871c","fromSide":"top","toNode":"af501351aef618aa","toSide":"left","color":"4"}
+	]
+}
