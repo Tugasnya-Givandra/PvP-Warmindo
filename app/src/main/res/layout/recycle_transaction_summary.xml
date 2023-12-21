@@ -39,16 +39,16 @@
             app:layout_constraintTop_toBottomOf="@+id/idTransaksi"
             tools:layout_editor_absoluteX="16dp">
 
-            <TextView android:id="@+id/labelBanyakPesanan"
+            <TextView android:id="@+id/labelAtasNama"
                 style="@style/text_common"
 
                 tools:text="Banyak pesanan" />
 
-            <TextView android:id="@+id/valBanyakPesanan"
+            <TextView android:id="@+id/valAtasNama"
                 style="@style/text_common"
                 android:textAlignment="textEnd"
 
-                tools:text="5" />
+                tools:text="shrs" />
         </LinearLayout>
 
         <LinearLayout

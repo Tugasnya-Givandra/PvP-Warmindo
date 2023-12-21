@@ -1,7 +1,7 @@
 package com.example.burjoholic7.ui.transactions
 
 import android.content.Context
-import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.burjoholic7.R
 import com.example.burjoholic7.api.Client
 import com.example.burjoholic7.api.Transaksi.TransaksiResponse

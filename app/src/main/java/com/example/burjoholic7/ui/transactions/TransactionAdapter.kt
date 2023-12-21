@@ -5,6 +5,7 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
@@ -42,15 +43,15 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
         @RequiresApi(Build.VERSION_CODES.O)
         override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
             val transaction = listTransaction!![position]
-            var time_ordered = LocalDateTime.parse("${transaction.tanggal}T${transaction.waktu}")
-            var time_rn = LocalDateTime.now()
+            val time_ordered = LocalDateTime.parse("${transaction.tanggal}T${transaction.waktu}")
+            val time_rn = LocalDateTime.now()
 
-            Duration.between((time_ordered., time_rn))
+            val minutes = Duration.between(time_ordered, time_rn).toMinutes()
 
-            holder.tvValBanyakPesanan.text = "3"
+            holder.tvAtasNama.text = transaction.namapelanggan
             holder.tvIdTransaksi.text      = transaction.id.toString()
             holder.tvValMeja.text          = transaction.kodemeja
-            holder.tvValLamaMenunggu.text  = "${(time_rn.- time_ordered) / 1000 / 60 / 60} Menit"
+            holder.tvValLamaMenunggu.text  = "$minutes Menit"
             holder.tvValStatus.text        = transaction.status
 
             holder.itemView.setOnClickListener {
@@ -70,6 +71,10 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
 
                 holder.itemView.context.startActivity(detailIntent)
             }
+
+            if (frag is HistoriesFragment) {
+                holder.rowLamaMenunggu.visibility = View.GONE
+            }
         }
         fun updateStatusById(transactionId: Int?, newStatus: String) {
             val position = listTransaction?.indexOfFirst { it.id == transactionId }
@@ -81,18 +86,19 @@ class TransactionAdapter(fragment: Fragment, list: ArrayList<Transaksi>?) : Recy
 
         class ListViewHolder(fragment: Fragment, itemView: View) : RecyclerView.ViewHolder(itemView) {
             var tvIdTransaksi:        TextView = itemView.findViewById(R.id.idTransaksi)
-            var tvValBanyakPesanan:   TextView = itemView.findViewById(R.id.valBanyakPesanan)
+            var tvAtasNama:   TextView = itemView.findViewById(R.id.valAtasNama)
             var tvValMeja:            TextView = itemView.findViewById(R.id.valMeja)
             var tvValLamaMenunggu:    TextView = itemView.findViewById(R.id.valLamaMenunggu)
             var tvValStatus:          TextView = itemView.findViewById(R.id.valStatus)
-            var tvLabelBanyakPesanan: TextView = itemView.findViewById(R.id.labelBanyakPesanan)
+            var tvLabelAtasNama: TextView = itemView.findViewById(R.id.labelAtasNama)
             var tvLabelMeja:          TextView = itemView.findViewById(R.id.labelMeja)
             var tvLabelLamaMenunggu:  TextView = itemView.findViewById(R.id.labelLamaMenunggu)
             var tvLabelStatus:        TextView = itemView.findViewById(R.id.labelStatus)
             var root:                 CardView = itemView.findViewById(R.id.root)
+            var rowLamaMenunggu:      LinearLayout = itemView.findViewById(R.id.linearLayout3)
 
             init {
-                tvLabelBanyakPesanan.text = "Banyak pesanan:"
+                tvLabelAtasNama.text = "Atas Nama"
                 tvLabelMeja.text = "Meja"
                 tvLabelLamaMenunggu.text = "Lama Menunggu"
                 tvLabelStatus.text = "Status"
